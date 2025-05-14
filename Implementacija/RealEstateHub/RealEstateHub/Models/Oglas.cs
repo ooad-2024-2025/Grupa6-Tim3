@@ -1,8 +1,5 @@
-﻿namespace RealEstateHub.Models
-
-{
-    public class Oglas
-    {
+﻿namespace RealEstateHub.Models{
+    public class Oglas{
 
         public int oglasId { get; set; }
         public bool jeAktivan { get; set; }
