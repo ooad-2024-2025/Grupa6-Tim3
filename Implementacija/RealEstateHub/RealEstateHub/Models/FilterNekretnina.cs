@@ -1,7 +1,5 @@
-﻿namespace RealEstateHub.Models
-{
-    public class FilterNekretnina
-    {
+﻿namespace RealEstateHub.Models{
+    public class FilterNekretnina{
         public int filterNekretninaId { get; set; }
         public double minCijena { get; set; }
         public double maxCijena { get; set; }

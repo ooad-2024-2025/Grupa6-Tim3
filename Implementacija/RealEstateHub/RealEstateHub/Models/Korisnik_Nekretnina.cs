@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RealEstateHub.Models
-{
-    public class Korisnik_Nekretnina
-    {
+namespace RealEstateHub.Models{
+    public class Korisnik_Nekretnina{
         [Key]
         public int kn_id { get; set; }
 
