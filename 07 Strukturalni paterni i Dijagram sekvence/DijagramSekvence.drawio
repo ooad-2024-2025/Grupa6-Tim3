@@ -1,0 +1,129 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" version="27.0.6">
+  <diagram name="Page-1" id="2YBvvXClWsGukQMizWep">
+    <mxGraphModel dx="1895" dy="1022" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-7" value="Nekretnina" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f9f7ed;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="260" y="106" width="100" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-15" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="GtvPXkSQ3gpmz2PAPE6Y-7" vertex="1">
+          <mxGeometry x="45" y="90" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-16" value="&amp;lt;&amp;lt;create&amp;gt;&amp;gt;Nekretnina()" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="GtvPXkSQ3gpmz2PAPE6Y-7" target="GtvPXkSQ3gpmz2PAPE6Y-15" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="50" y="70" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="80" y="100" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-22" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="GtvPXkSQ3gpmz2PAPE6Y-7" vertex="1">
+          <mxGeometry x="45" y="161" width="10" height="39" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-8" value="Oglas" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f9f7ed;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="430" y="106" width="100" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-20" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="GtvPXkSQ3gpmz2PAPE6Y-8" vertex="1">
+          <mxGeometry x="50" y="274" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-21" value="jeAktivan(true)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="GtvPXkSQ3gpmz2PAPE6Y-8" target="GtvPXkSQ3gpmz2PAPE6Y-20" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="254" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="284" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-24" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="GtvPXkSQ3gpmz2PAPE6Y-8" vertex="1">
+          <mxGeometry x="50" y="334" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-25" value="DatumPostavljanja(trenutniDatum)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="GtvPXkSQ3gpmz2PAPE6Y-8" target="GtvPXkSQ3gpmz2PAPE6Y-24" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="314" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="344" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-9" value="Obavještenje" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f9f7ed;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="740" y="106" width="100" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-11" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;fillColor=#f9f7ed;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="80" y="106" width="20" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-12" value="Agent" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;html=1;" parent="1" vertex="1">
+          <mxGeometry x="50" y="80" width="80" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-13" value="kreirajNekretninu()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="89.32352941176487" y="176" as="sourcePoint" />
+            <mxPoint x="309.49999999999955" y="176" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-14" value="Korisnik" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};fillColor=#f9f7ed;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="1030" y="106" width="100" height="720" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-17" value="potvrda (omogućen unos)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;" parent="1" target="GtvPXkSQ3gpmz2PAPE6Y-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="206" as="sourcePoint" />
+            <mxPoint x="220" y="206" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-18" value="postaviDetalje(naslov, cijena, opis)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="90" y="266" as="sourcePoint" />
+            <mxPoint x="310.1764705882347" y="266" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-19" value="kreirajOglas(Nekretnina)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="90" y="360" as="sourcePoint" />
+            <mxPoint x="479.49999999999955" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-23" value="return(Nekretnina)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="302" y="295" as="sourcePoint" />
+            <mxPoint x="91" y="295" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-26" value="prikazPotvrde(&quot;Oglas je uspjesno objavljen!&quot;)" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;fontSize=12;" parent="1" target="GtvPXkSQ3gpmz2PAPE6Y-11" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="466" as="sourcePoint" />
+            <mxPoint x="400" y="466" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-27" value="Proces slanja obavještenja o novom oglasu" style="html=1;whiteSpace=wrap;fillColor=#ffcccc;strokeColor=#36393d;" parent="1" vertex="1">
+          <mxGeometry x="425" y="496" width="760" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-29" value="loop" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" parent="1" vertex="1">
+          <mxGeometry x="460" y="566" width="680" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-30" value="kreirajObavijest()" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="480" y="616" as="sourcePoint" />
+            <mxPoint x="790" y="616" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-31" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" parent="1" vertex="1">
+          <mxGeometry x="790" y="636" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-32" value="&amp;lt;&amp;lt;create&amp;gt;&amp;gt;Obavjestenje(oglas, korisnik)" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="1" target="GtvPXkSQ3gpmz2PAPE6Y-31" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="795" y="616" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="825" y="646" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="GtvPXkSQ3gpmz2PAPE6Y-36" value="posaljiObavjestenje(obavjestenje)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;fontSize=12;startSize=8;endSize=8;" parent="1" edge="1">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="791" y="736" as="sourcePoint" />
+            <mxPoint x="1080.5" y="736" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
