@@ -1,0 +1,47 @@
+﻿@model IEnumerable<RealEstateHub.Models.Oglas>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.jeAktivan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.datumPostavljanja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.brojPregleda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.jeAktivan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.datumPostavljanja)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.brojPregleda)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.oglasId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.oglasId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.oglasId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

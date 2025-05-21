@@ -1,0 +1,59 @@
+﻿@model IEnumerable<RealEstateHub.Models.Lokacija>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nekretninaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.grad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.adresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.latituda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.longituda)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nekretninaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.grad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.adresa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.latituda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.longituda)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.lokacijaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.lokacijaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.lokacijaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

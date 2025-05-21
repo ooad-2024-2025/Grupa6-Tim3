@@ -1,11 +1,19 @@
 is_global = true
 build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
 build_property.TargetPlatformMinVersion = 
 build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
 build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RealEstateHub
 build_property.RootNamespace = RealEstateHub
@@ -24,12 +32,232 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/FilterNekretnina/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsdGVyTmVrcmV0bmluYVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/FilterNekretnina/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsdGVyTmVrcmV0bmluYVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/FilterNekretnina/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsdGVyTmVrcmV0bmluYVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/FilterNekretnina/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsdGVyTmVrcmV0bmluYVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/FilterNekretnina/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmlsdGVyTmVrcmV0bmluYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kategorija/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlqYVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kategorija/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlqYVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kategorija/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlqYVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kategorija/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlqYVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kategorija/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2F0ZWdvcmlqYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik_Nekretnina/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtfTmVrcmV0bmluYVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik_Nekretnina/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtfTmVrcmV0bmluYVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik_Nekretnina/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtfTmVrcmV0bmluYVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik_Nekretnina/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtfTmVrcmV0bmluYVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Korisnik_Nekretnina/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS29yaXNuaWtfTmVrcmV0bmluYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kriterij/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS3JpdGVyaWpcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kriterij/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS3JpdGVyaWpcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kriterij/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS3JpdGVyaWpcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kriterij/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS3JpdGVyaWpcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Kriterij/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS3JpdGVyaWpcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Lokacija/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9rYWNpamFcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Lokacija/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9rYWNpamFcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Lokacija/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9rYWNpamFcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Lokacija/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9rYWNpamFcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Lokacija/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9rYWNpamFcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Obavjestenje/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2Jhdmplc3RlbmplXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Obavjestenje/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2Jhdmplc3RlbmplXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Obavjestenje/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2Jhdmplc3RlbmplXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Obavjestenje/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2Jhdmplc3RlbmplXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Obavjestenje/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2Jhdmplc3RlbmplXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Oglas/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Oglas/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Oglas/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Oglas/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Oglas/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcT2dsYXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Poruka/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydWthXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Poruka/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydWthXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Poruka/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydWthXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Poruka/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydWthXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Poruka/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9ydWthXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Sesija/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaWphXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Sesija/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaWphXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Sesija/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaWphXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Sesija/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaWphXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Sesija/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VzaWphXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Shared/Error.cshtml]

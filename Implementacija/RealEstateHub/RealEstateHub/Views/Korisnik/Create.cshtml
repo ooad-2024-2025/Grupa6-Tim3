@@ -1,0 +1,58 @@
+﻿@model RealEstateHub.Models.Korisnik
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Korisnik</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="imeKorisnika" class="control-label"></label>
+                <input asp-for="imeKorisnika" class="form-control" />
+                <span asp-validation-for="imeKorisnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="prezimeKorisnika" class="control-label"></label>
+                <input asp-for="prezimeKorisnika" class="form-control" />
+                <span asp-validation-for="prezimeKorisnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="emailKorisnika" class="control-label"></label>
+                <input asp-for="emailKorisnika" class="form-control" />
+                <span asp-validation-for="emailKorisnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="lozinkaKorisnika" class="control-label"></label>
+                <input asp-for="lozinkaKorisnika" class="form-control" />
+                <span asp-validation-for="lozinkaKorisnika" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="brojTelefona" class="control-label"></label>
+                <input asp-for="brojTelefona" class="form-control" />
+                <span asp-validation-for="brojTelefona" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="datumPridruzivanja" class="control-label"></label>
+                <input asp-for="datumPridruzivanja" class="form-control" />
+                <span asp-validation-for="datumPridruzivanja" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

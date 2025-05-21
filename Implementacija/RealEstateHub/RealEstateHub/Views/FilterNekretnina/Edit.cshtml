@@ -1,0 +1,54 @@
+﻿@model RealEstateHub.Models.FilterNekretnina
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>FilterNekretnina</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="filterNekretninaId" />
+            <div class="form-group">
+                <label asp-for="minCijena" class="control-label"></label>
+                <input asp-for="minCijena" class="form-control" />
+                <span asp-validation-for="minCijena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="maxCijena" class="control-label"></label>
+                <input asp-for="maxCijena" class="form-control" />
+                <span asp-validation-for="maxCijena" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="brojSoba" class="control-label"></label>
+                <input asp-for="brojSoba" class="form-control" />
+                <span asp-validation-for="brojSoba" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="kvadratura" class="control-label"></label>
+                <input asp-for="kvadratura" class="form-control" />
+                <span asp-validation-for="kvadratura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tipNekretnine" class="control-label"></label>
+                <select asp-for="tipNekretnine" class="form-control"></select>
+                <span asp-validation-for="tipNekretnine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
