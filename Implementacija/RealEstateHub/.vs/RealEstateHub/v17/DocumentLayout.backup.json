@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|c:\\users\\dzafi\\onedrive\\dokumenti\\github\\grupa6-tim3\\implementacija\\realestatehub\\realestatehub\\models\\filternekretnina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|solutionrelative:realestatehub\\models\\filternekretnina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FilterNekretnina.cs",
+              "DocumentMoniker": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Models\\FilterNekretnina.cs",
+              "RelativeDocumentMoniker": "RealEstateHub\\Models\\FilterNekretnina.cs",
+              "ToolTip": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Models\\FilterNekretnina.cs",
+              "RelativeToolTip": "RealEstateHub\\Models\\FilterNekretnina.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T10:21:19.824Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
