@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|c:\\users\\dzafi\\onedrive\\dokumenti\\github\\grupa6-tim3\\implementacija\\realestatehub\\realestatehub\\models\\filternekretnina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|solutionrelative:realestatehub\\models\\filternekretnina.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|c:\\users\\dzafi\\onedrive\\dokumenti\\github\\grupa6-tim3\\implementacija\\realestatehub\\realestatehub\\models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|solutionrelative:realestatehub\\models\\korisnik.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FilterNekretnina.cs",
-              "DocumentMoniker": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Models\\FilterNekretnina.cs",
-              "RelativeDocumentMoniker": "RealEstateHub\\Models\\FilterNekretnina.cs",
-              "ToolTip": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Models\\FilterNekretnina.cs",
-              "RelativeToolTip": "RealEstateHub\\Models\\FilterNekretnina.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Title": "Korisnik.cs",
+              "DocumentMoniker": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Models\\Korisnik.cs",
+              "RelativeDocumentMoniker": "RealEstateHub\\Models\\Korisnik.cs",
+              "ToolTip": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Models\\Korisnik.cs",
+              "RelativeToolTip": "RealEstateHub\\Models\\Korisnik.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAUwBAAAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T10:21:19.824Z",
+              "WhenOpened": "2025-05-27T20:35:31.526Z",
               "EditorCaption": ""
             }
           ]

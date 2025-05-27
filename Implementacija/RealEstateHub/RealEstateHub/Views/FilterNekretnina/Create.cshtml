@@ -34,7 +34,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="tipNekretnine" class="control-label"></label>
-                <select asp-for="tipNekretnine" class="form-control"></select>
+                <select asp-for="tipNekretnine" class="form-control"
+                asp-items="Html.GetEnumSelectList<Kategorija>()"></select>
                 <span asp-validation-for="tipNekretnine" class="text-danger"></span>
             </div>
             <div class="form-group">
