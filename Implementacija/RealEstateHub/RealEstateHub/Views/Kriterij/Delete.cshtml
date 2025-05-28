@@ -4,9 +4,9 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Obriši kriterij</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Da li ste sigurni da želite da obrišete kriterij?</h3>
 <div>
     <h4>Kriterij</h4>
     <hr />
@@ -21,7 +21,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="kriterijId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Obriši" class="btn btn-danger" /> |
+        <a asp-action="Index">Vrati se na listu kriterija</a>
     </form>
 </div>

@@ -4,12 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1 class="text-center">Dodaj poruku</h1>
 
-<h4>Poruka</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+<div class="row justify-content-center">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -37,15 +36,15 @@
                 <input asp-for="datumSlanja" class="form-control" type="date" />
                 <span asp-validation-for="datumSlanja" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group text-center">
+                <input type="submit" value="Dodaj" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="text-center mt-3">
+    <a asp-action="Index">Vrati se na listu poruka</a>
 </div>
 
 @section Scripts {

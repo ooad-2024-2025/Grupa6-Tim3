@@ -6,7 +6,6 @@ namespace RealEstateHub.Models{
 
         [Display(Name = "Aktivan")]
         public bool jeAktivan { get; set; }
-
         public Nekretnina nekretnina { get; set; }
 
         [Display(Name = "Datum postavljanja")]

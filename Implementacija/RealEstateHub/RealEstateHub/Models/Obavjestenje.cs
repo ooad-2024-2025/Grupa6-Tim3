@@ -9,6 +9,8 @@ namespace RealEstateHub.Models{
         public DateTime datumObavjestenja { get; set; }
 
         [Display(Name = "Poruka")]
+        [StringLength(maximumLength: 200, MinimumLength = 5, ErrorMessage =
+            "Poruka mora imati između 5 i 200 znakova!")]
         public string poruka { get; set; }
 
         [Display(Name = "Kriterij")]

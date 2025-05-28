@@ -1,3 +1,0 @@
-C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\wwwroot\lib\bootstrap\dist\css\bootstrap.css
-C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
-C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map

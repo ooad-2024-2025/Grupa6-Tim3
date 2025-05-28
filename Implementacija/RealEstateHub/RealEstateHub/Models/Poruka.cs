@@ -7,6 +7,8 @@ namespace RealEstateHub.Models{
         public int primalacId { get; set; }
 
         [Display(Name = "Sadrzaj")]
+        [StringLength(maximumLength: 200, MinimumLength = 5, ErrorMessage =
+            "Poruka mora imati između 5 i 200 znakova!")]
         public string sadrzaj { get; set; }
 
         [Display(Name = "Procitano")]
