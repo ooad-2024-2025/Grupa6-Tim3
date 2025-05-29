@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RealEstateHub.Models{
     public class Nekretnina{
@@ -33,10 +34,13 @@ namespace RealEstateHub.Models{
         [Range(1, int.MaxValue, ErrorMessage = "Dozvoljeni su samo brojevi!")]
         public int brojSoba { get; set; }
 
-        public int vlasnikId { get; set; }
-
         [Display(Name = "Vrsta nekretnine")]
         [EnumDataType(typeof(Kategorija))]
         public Kategorija vrstaNekretnine { get; set; }
+
+        public string VlasnikId { get; set; }
+
+        [ForeignKey("VlasnikId")]
+        public ApplicationUser Vlasnik { get; set; }
     }
 }
