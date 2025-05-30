@@ -42,5 +42,7 @@ namespace RealEstateHub.Models{
 
         [ForeignKey("VlasnikId")]
         public ApplicationUser Vlasnik { get; set; }
+
+        public string Slika { get; set; }
     }
 }

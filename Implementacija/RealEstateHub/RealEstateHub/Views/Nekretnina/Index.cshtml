@@ -3,7 +3,6 @@
 
 @{
     ViewData["Title"] = "Index";
-    // Dobavi ID trenutno prijavljenog korisnika
     var currentUserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 }
 
@@ -12,30 +11,18 @@
 <p>
     <a asp-action="Create">Dodaj novu nekretninu</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.naslov)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.opisNekretnine)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cijena)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.kvadratura)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.lokacija)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.brojSoba)
-            </th>         
-            <th>
-                @Html.DisplayNameFor(model => model.vrstaNekretnine)
-            </th>
+            <th>@Html.DisplayNameFor(model => model.naslov)</th>
+            <th>@Html.DisplayNameFor(model => model.opisNekretnine)</th>
+            <th>@Html.DisplayNameFor(model => model.cijena)</th>
+            <th>@Html.DisplayNameFor(model => model.kvadratura)</th>
+            <th>@Html.DisplayNameFor(model => model.lokacija)</th>
+            <th>@Html.DisplayNameFor(model => model.brojSoba)</th>
+            <th>@Html.DisplayNameFor(model => model.vrstaNekretnine)</th>
+            <th>Slika</th> <!-- Dodatni stupac -->
             <th></th>
         </tr>
     </thead>
@@ -43,26 +30,18 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>@Html.DisplayFor(modelItem => item.naslov)</td>
+                <td>@Html.DisplayFor(modelItem => item.opisNekretnine)</td>
+                <td>@Html.DisplayFor(modelItem => item.cijena)</td>
+                <td>@Html.DisplayFor(modelItem => item.kvadratura)</td>
+                <td>@Html.DisplayFor(modelItem => item.lokacija)</td>
+                <td>@Html.DisplayFor(modelItem => item.brojSoba)</td>
+                <td>@Html.DisplayFor(modelItem => item.vrstaNekretnine)</td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.naslov)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.opisNekretnine)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.cijena)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.kvadratura)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.lokacija)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.brojSoba)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.vrstaNekretnine)
+                    @if (!string.IsNullOrEmpty(item.Slika))
+                    {
+                        <img src="@item.Slika" alt="Slika nekretnine" style="max-width:100px; max-height:100px;" />
+                    }
                 </td>
                 <td>
                     <a asp-action="Details" asp-route-id="@item.Id">Detalji</a>

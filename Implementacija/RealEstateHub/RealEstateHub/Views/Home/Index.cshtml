@@ -1,10 +1,53 @@
-﻿@{
+﻿@model IEnumerable<RealEstateHub.Models.Nekretnina>
+@{
     ViewData["Title"] = "Početna stranica";
 }
 
-<h1>Dobrodošli na RealEstateHub!</h1>
+<div class="text-center">
+    <h1 class="display-4">Dobrodošli u svijet nekretnina!</h1>  
+</div>
 
-<p>
-    <a asp-controller="Nekretnina" asp-action="Index" class="btn btn-primary">Pogledaj sve nekretnine</a>
+<hr />
 
-</p>
+<h4>Najnovije nekretnine</h4>
+
+@if (Model != null && Model.Any())
+{
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    @if (!string.IsNullOrEmpty(item.Slika))
+                    {
+                        <img src="@item.Slika" class="card-img-top" alt="Slika nekretnine" style="height: 200px; object-fit: cover;">
+                    }
+                    else
+                    {
+                        <img src="https://via.placeholder.com/200x150?text=Nema+Slike" class="card-img-top" alt="Nema slike" style="height: 200px; object-fit: cover;">
+                    }
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.naslov)</h5>
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.lokacija)</p>
+                        <p class="card-text">Cijena: @Html.DisplayFor(modelItem => item.cijena) KM</p>
+                        <p class="card-text">Kvadratura: @Html.DisplayFor(modelItem => item.kvadratura) m²</p>
+                        <a asp-controller="Nekretnina" asp-action="Details" asp-route-id="@item.Id" class="btn bg-beige btn-sm text-dark border">Detalji</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>Trenutno nema dostupnih nekretnina.</p>
+}
+
+<div class="text-center mt-4">
+    <a asp-controller="Nekretnina" asp-action="Index" class="btn bg-beige text-dark border btn-lg">Pogledaj sve nekretnine</a>
+</div>
+
+
+
+
+

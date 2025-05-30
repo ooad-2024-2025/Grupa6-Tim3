@@ -1,21 +1,34 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using RealEstateHub.Models;
+using RealEstateHub.Data;   
+using System.Linq;          
+using System.Threading.Tasks; 
+using Microsoft.EntityFrameworkCore; 
 
 namespace RealEstateHub.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context; 
 
-        public HomeController(ILogger<HomeController> logger)
+        // Ažuriraj konstruktor da prima ApplicationDbContext
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context; 
         }
 
-        public IActionResult Index()
+        // Ažuriraj Index akciju da dohvati tri najnovije nekretnine
+        public async Task<IActionResult> Index()
         {
-            return View();
+            // Dohvati tri najnovije nekretnine po ID-u (pretpostavljamo da je veæi ID noviji unos)
+            var najnovijeNekretnine = await _context.Nekretnina
+                                                .OrderByDescending(n => n.Id)
+                                                .Take(3)
+                                                .ToListAsync();
+            return View(najnovijeNekretnine); 
         }
 
         public IActionResult Privacy()

@@ -24,7 +24,9 @@ namespace RealEstateHub.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
+           
             return View(await _context.Nekretnina.ToListAsync());
+
         }
 
         [AllowAnonymous]
@@ -54,7 +56,8 @@ namespace RealEstateHub.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Korisnik, Administrator")]
-        public async Task<IActionResult> Create([Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine")] Nekretnina nekretnina)
+        public async Task<IActionResult> Create(
+            [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine,Slika")] Nekretnina nekretnina)
         {
             ModelState.Remove("VlasnikId");
             ModelState.Remove("Vlasnik");
@@ -69,6 +72,7 @@ namespace RealEstateHub.Controllers
             }
             return View(nekretnina);
         }
+
 
         [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Edit(int? id)
@@ -85,7 +89,7 @@ namespace RealEstateHub.Controllers
             }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (nekretnina.VlasnikId != currentUserId)
+            if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
             {
                 return Forbid();
             }
@@ -96,9 +100,9 @@ namespace RealEstateHub.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Korisnik, Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine")] Nekretnina nekretnina)
+        public async Task<IActionResult> Edit(int id,
+            [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine,Slika")] Nekretnina nekretnina)
         {
-
             ModelState.Remove("VlasnikId");
             ModelState.Remove("Vlasnik");
 
@@ -114,12 +118,17 @@ namespace RealEstateHub.Controllers
             }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (existingNekretnina.VlasnikId != currentUserId)
+            if (existingNekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
             {
                 return Forbid();
             }
 
             nekretnina.VlasnikId = existingNekretnina.VlasnikId;
+
+            if (string.IsNullOrEmpty(nekretnina.Slika))
+            {
+                nekretnina.Slika = existingNekretnina.Slika;
+            }
 
             if (ModelState.IsValid)
             {
@@ -160,7 +169,7 @@ namespace RealEstateHub.Controllers
             }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (nekretnina.VlasnikId != currentUserId)
+            if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
             {
                 return Forbid();
             }
@@ -181,7 +190,7 @@ namespace RealEstateHub.Controllers
             }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (nekretnina.VlasnikId != currentUserId)
+            if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
             {
                 return Forbid();
             }
