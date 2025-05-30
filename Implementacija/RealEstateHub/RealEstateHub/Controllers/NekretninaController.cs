@@ -47,7 +47,7 @@ namespace RealEstateHub.Controllers{
         }
 
         // GET: Nekretnina/Create
-        [Authorize(Roles = "Korisnik")]
+        [Authorize(Roles = "Korisnik, Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -58,10 +58,13 @@ namespace RealEstateHub.Controllers{
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Korisnik")]
+        [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Create([Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine")] Nekretnina nekretnina)
 
         {
+            ModelState.Remove("VlasnikId");
+            ModelState.Remove("Vlasnik"); // Ako se i za Vlasnik žali
+
             if (ModelState.IsValid){
                 // Postavi VlasnikId iz prijavljenog korisnika
                 nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
