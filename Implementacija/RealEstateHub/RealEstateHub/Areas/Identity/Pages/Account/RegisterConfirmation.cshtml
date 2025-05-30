@@ -1,0 +1,23 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Potvrda registracije";
+}
+
+<h1>@ViewData["Title"]</h1>
+@{
+    if (@Model.DisplayConfirmAccountLink)
+    {
+<p>
+            Ova aplikacija trenutno nema registrovan stvarni pošiljalac e-pošte, pogledajte <a href="https://aka.ms/aspaccountconf">ovu dokumentaciju</a> kako da konfigurišete stvarnog pošiljaoca e-pošte.
+            Obično bi ovo bilo poslato putem e-pošte: <a id="confirm-link" href="@Model.EmailConfirmationUrl">Kliknite ovdje da potvrdite svoj nalog.</a>
+</p>
+    }
+    else
+    {
+<p>
+            Molimo vas da provjerite svoj e-mail kako biste potvrdili svoj nalog.
+</p>
+    }
+}
+
