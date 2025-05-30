@@ -10,7 +10,8 @@ using RealEstateHub.Data;
 using RealEstateHub.Models;
 using Microsoft.AspNetCore.Authorization;
 
-namespace RealEstateHub.Controllers{
+namespace RealEstateHub.Controllers
+{
     public class NekretninaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,14 +21,12 @@ namespace RealEstateHub.Controllers{
             _context = context;
         }
 
-        // GET: Nekretnina
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Nekretnina.ToListAsync());
         }
 
-        // GET: Nekretnina/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
@@ -46,27 +45,22 @@ namespace RealEstateHub.Controllers{
             return View(nekretnina);
         }
 
-        // GET: Nekretnina/Create
         [Authorize(Roles = "Korisnik, Administrator")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Nekretnina/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Create([Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine")] Nekretnina nekretnina)
-
         {
             ModelState.Remove("VlasnikId");
-            ModelState.Remove("Vlasnik"); // Ako se i za Vlasnik žali
+            ModelState.Remove("Vlasnik");
 
-            if (ModelState.IsValid){
-                // Postavi VlasnikId iz prijavljenog korisnika
+            if (ModelState.IsValid)
+            {
                 nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 _context.Add(nekretnina);
@@ -76,8 +70,7 @@ namespace RealEstateHub.Controllers{
             return View(nekretnina);
         }
 
-        // GET: Nekretnina/Edit/5
-        [Authorize(Roles = "Korisnik")]
+        [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -90,22 +83,43 @@ namespace RealEstateHub.Controllers{
             {
                 return NotFound();
             }
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (nekretnina.VlasnikId != currentUserId)
+            {
+                return Forbid();
+            }
+
             return View(nekretnina);
         }
 
-        // POST: Nekretnina/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Korisnik")]
-
-        public async Task<IActionResult> Edit(int id, [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vlasnikId,vrstaNekretnine")] Nekretnina nekretnina)
+        [Authorize(Roles = "Korisnik, Administrator")]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine")] Nekretnina nekretnina)
         {
+
+            ModelState.Remove("VlasnikId");
+            ModelState.Remove("Vlasnik");
+
             if (id != nekretnina.Id)
             {
                 return NotFound();
             }
+
+            var existingNekretnina = await _context.Nekretnina.AsNoTracking().FirstOrDefaultAsync(n => n.Id == id);
+            if (existingNekretnina == null)
+            {
+                return NotFound();
+            }
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (existingNekretnina.VlasnikId != currentUserId)
+            {
+                return Forbid();
+            }
+
+            nekretnina.VlasnikId = existingNekretnina.VlasnikId;
 
             if (ModelState.IsValid)
             {
@@ -130,8 +144,7 @@ namespace RealEstateHub.Controllers{
             return View(nekretnina);
         }
 
-        // GET: Nekretnina/Delete/5
-        [Authorize(Roles = "Korisnik")]
+        [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -146,16 +159,33 @@ namespace RealEstateHub.Controllers{
                 return NotFound();
             }
 
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (nekretnina.VlasnikId != currentUserId)
+            {
+                return Forbid();
+            }
+
             return View(nekretnina);
         }
 
-        // POST: Nekretnina/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Korisnik")]
+        [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nekretnina = await _context.Nekretnina.FindAsync(id);
+
+            if (nekretnina == null)
+            {
+                return NotFound();
+            }
+
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (nekretnina.VlasnikId != currentUserId)
+            {
+                return Forbid();
+            }
+
             if (nekretnina != null)
             {
                 _context.Nekretnina.Remove(nekretnina);

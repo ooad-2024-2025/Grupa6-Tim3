@@ -1,7 +1,10 @@
 ﻿@model IEnumerable<RealEstateHub.Models.Nekretnina>
+@using System.Security.Claims
 
 @{
     ViewData["Title"] = "Index";
+    // Dobavi ID trenutno prijavljenog korisnika
+    var currentUserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 }
 
 <h1>Lista nekretnina</h1>
@@ -31,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.brojSoba)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VlasnikId)                
+                @Html.DisplayNameFor(model => model.VlasnikId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.vrstaNekretnine)
@@ -40,43 +43,44 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.naslov)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.opisNekretnine)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cijena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.kvadratura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lokacija)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brojSoba)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VlasnikId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.vrstaNekretnine)
-            </td>         
+        @foreach (var item in Model)
+        {
+            <tr>
                 <td>
-                    @if (User.IsInRole("Administrator"))
-                    {      
+                    @Html.DisplayFor(modelItem => item.naslov)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.opisNekretnine)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cijena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.kvadratura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lokacija)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brojSoba)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VlasnikId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.vrstaNekretnine)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Detalji</a>
+                    @if (item.VlasnikId == currentUserId || User.IsInRole("Administrator"))
+                    {
+                        <nobr>|</nobr>
                         <a asp-action="Edit" asp-route-id="@item.Id">Uredi</a>
                         <nobr>|</nobr>
                         <a asp-action="Delete" asp-route-id="@item.Id">Obriši</a>
-                        <nobr>|</nobr>
                     }
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalji</a>
                 </td>
-        </tr>
-}
+            </tr>
+        }
     </tbody>
 </table>
