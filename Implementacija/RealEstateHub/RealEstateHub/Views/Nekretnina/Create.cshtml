@@ -41,8 +41,7 @@
                 <label asp-for="brojSoba" class="control-label"></label>
                 <input asp-for="brojSoba" class="form-control" />
                 <span asp-validation-for="brojSoba" class="text-danger"></span>
-            </div>
-            <input asp-for="VlasnikId" type="hidden" value="@User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value" />
+            </div>       
             <div class="form-group">
                 <label asp-for="vrstaNekretnine" class="control-label"></label>
                 <select asp-for="vrstaNekretnine" class="form-control"

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using RealEstateHub.Data;
 using RealEstateHub.Models;
 
@@ -26,6 +27,14 @@ builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+//dodano
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    await CreateRolesAsync(services);
+}
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -49,5 +58,22 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapRazorPages();
+
+//dodano
+async Task CreateRolesAsync(IServiceProvider serviceProvider)
+{
+    var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    string[] roleNames = { "Administrator", "Korisnik" };
+
+    foreach (var roleName in roleNames)
+    {
+        var roleExists = await roleManager.RoleExistsAsync(roleName);
+        if (!roleExists)
+        {
+            await roleManager.CreateAsync(new IdentityRole(roleName));
+        }
+    }
+}
+
 
 app.Run();

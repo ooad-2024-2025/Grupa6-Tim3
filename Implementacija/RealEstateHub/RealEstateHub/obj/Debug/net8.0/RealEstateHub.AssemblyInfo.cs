@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RealEstateHub")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5ea2c47298cf0d6346bca060f5203f8367831b5d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b280319d4c57f364b42976d3a845737c3d884256")]
 [assembly: System.Reflection.AssemblyProductAttribute("RealEstateHub")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RealEstateHub")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

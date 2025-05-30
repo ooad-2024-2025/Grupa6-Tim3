@@ -47,7 +47,7 @@ namespace RealEstateHub.Controllers{
         }
 
         // GET: Nekretnina/Create
-        [Authorize]
+        [Authorize(Roles = "Korisnik")]
         public IActionResult Create()
         {
             return View();
@@ -58,12 +58,11 @@ namespace RealEstateHub.Controllers{
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<IActionResult> Create([Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine,VlasnikId")] Nekretnina nekretnina)
+        [Authorize(Roles = "Korisnik")]
+        public async Task<IActionResult> Create([Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine")] Nekretnina nekretnina)
 
         {
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid){
                 // Postavi VlasnikId iz prijavljenog korisnika
                 nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -75,7 +74,7 @@ namespace RealEstateHub.Controllers{
         }
 
         // GET: Nekretnina/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Korisnik")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -96,7 +95,8 @@ namespace RealEstateHub.Controllers{
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Korisnik")]
+
         public async Task<IActionResult> Edit(int id, [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vlasnikId,vrstaNekretnine")] Nekretnina nekretnina)
         {
             if (id != nekretnina.Id)
@@ -128,7 +128,7 @@ namespace RealEstateHub.Controllers{
         }
 
         // GET: Nekretnina/Delete/5
-        [Authorize]
+        [Authorize(Roles = "Korisnik")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -149,7 +149,7 @@ namespace RealEstateHub.Controllers{
         // POST: Nekretnina/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Roles = "Korisnik")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var nekretnina = await _context.Nekretnina.FindAsync(id);
