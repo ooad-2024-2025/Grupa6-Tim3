@@ -34,32 +34,33 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.imeKorisnika)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.prezimeKorisnika)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.emailKorisnika)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.lozinkaKorisnika)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brojTelefona)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.datumPridruzivanja)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.korisnikId">Uredi</a> |
-                <a asp-action="Details" asp-route-id="@item.korisnikId">Detalji</a> |
-                <a asp-action="Delete" asp-route-id="@item.korisnikId">Obriši</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.imeKorisnika)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.prezimeKorisnika)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.emailKorisnika)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lozinkaKorisnika)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.brojTelefona)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.datumPridruzivanja)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.korisnikId">Uredi</a> |
+                    <a asp-action="Details" asp-route-id="@item.korisnikId">Detalji</a> |
+                    <a asp-action="Delete" asp-route-id="@item.korisnikId">Obriši</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

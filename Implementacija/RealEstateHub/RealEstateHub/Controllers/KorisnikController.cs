@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RealEstateHub.Data;
 using RealEstateHub.Models;
+using Microsoft.AspNetCore.Identity;
+using RealEstateHub.Models;
 
 namespace RealEstateHub.Controllers
 {
