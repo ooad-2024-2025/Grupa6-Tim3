@@ -1,0 +1,43 @@
+﻿@model IEnumerable<RealEstateHub.Models.Poruka>
+
+@{
+    ViewData["Title"] = "Razgovor";
+    var trenutniKorisnikId = ViewData["TrenutniKorisnikId"]?.ToString();
+    var drugiKorisnikId = ViewData["DrugiKorisnikId"]?.ToString();
+    var drugiKorisnikImePrezime = ViewData["DrugiKorisnikImePrezime"]?.ToString();
+}
+
+<a asp-action="MojePoruke" class="btn btn-secondary mb-3">Nazad na razgovore</a>
+
+<div class="container" style="max-width: 700px;">
+    <div class="border rounded p-3 mb-4" style="background-color: #f9f9f9; height: 400px; overflow-y: auto;">
+        @if (!Model.Any())
+        {
+            <div class="text-center text-muted">Nema poruka između korisnika.</div>
+        }
+        else
+        {
+            foreach (var poruka in Model)
+            {
+                var jaSamPosiljalac = poruka.posiljalacId == trenutniKorisnikId;
+
+                <div class="d-flex mb-2 @(jaSamPosiljalac ? "justify-content-end" : "justify-content-start")">
+                    <div class="p-2 rounded shadow-sm" style="@(jaSamPosiljalac ? "background-color:#DCF8C6; text-align:right;" : "background-color:#ECECEC; text-align:left;") max-width: 70%;">
+                        <strong>@(jaSamPosiljalac ? "Ja" : poruka.Posiljalac.FirstName + " " + poruka.Posiljalac.LastName)</strong><br />
+                        @poruka.sadrzaj<br />
+                        <small class="text-muted">@poruka.datumSlanja.ToString("dd.MM.yyyy HH:mm")</small>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <form asp-action="PosaljiPoruku" method="post" class="mt-4">
+        <input type="hidden" name="primalacId" value="@drugiKorisnikId" />
+        <div class="form-group">
+            <label for="sadrzaj">Nova poruka</label>
+            <textarea name="sadrzaj" class="form-control" rows="3" required minlength="5" maxlength="200" placeholder="Upišite poruku..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Pošalji</button>
+    </form>
+</div>

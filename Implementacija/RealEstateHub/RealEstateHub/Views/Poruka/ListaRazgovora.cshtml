@@ -1,0 +1,52 @@
+﻿@model IEnumerable<RealEstateHub.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "Moji Razgovori";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h2 class="mb-4 text-center text-dark">
+                <i class="bi bi-chat-dots-fill me-2"></i> Aktivni razgovori
+            </h2>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info text-center shadow-sm" role="alert">
+                    <i class="bi bi-info-circle-fill me-2"></i> Trenutno nemate aktivnih razgovora.
+                </div>
+            }
+            else
+            {
+                <div class="list-group shadow-sm">
+                    @foreach (var korisnik in Model)
+                    {
+                        <div class="list-group-item d-flex align-items-center py-3 px-4 mb-2 border rounded-3">
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0">                                    
+                                    <a href="@Url.Action("Chat", new { drugiKorisnikId = korisnik.Id })" class="text-decoration-none text-dark">
+                                        @korisnik.FirstName @korisnik.LastName
+                                    </a>
+                                </h5>
+                                <small class="text-muted">Kliknite na ime za pregled poruka</small>
+                            </div>
+                            <div class="ms-auto d-flex gap-2">                                
+                                <a class="btn btn-sm btn-outline-primary" asp-action="Chat" asp-route-drugiKorisnikId="@korisnik.Id">
+                                    <i class="bi bi-eye-fill me-1"></i> Prikaži poruke
+                                </a>
+                                <form asp-action="ObrisiRazgovor" method="post" class="d-inline">
+                                    @Html.AntiForgeryToken() 
+                                    <input type="hidden" name="drugiKorisnikId" value="@korisnik.Id" />                                    
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash-fill me-1"></i> Obriši razgovor
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

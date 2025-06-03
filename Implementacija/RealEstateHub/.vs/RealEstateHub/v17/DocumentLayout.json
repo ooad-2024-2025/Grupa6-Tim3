@@ -1,0 +1,54 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|c:\\users\\dzafi\\onedrive\\dokumenti\\github\\grupa6-tim3\\implementacija\\realestatehub\\realestatehub\\views\\nekretnina\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|solutionrelative:realestatehub\\views\\nekretnina\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|c:\\users\\dzafi\\onedrive\\dokumenti\\github\\grupa6-tim3\\implementacija\\realestatehub\\realestatehub\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{4A927A06-B901-4C6E-B3DE-FC615567D799}|RealEstateHub\\RealEstateHub.csproj|solutionrelative:realestatehub\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Views\\Nekretnina\\Details.cshtml",
+              "RelativeDocumentMoniker": "RealEstateHub\\Views\\Nekretnina\\Details.cshtml",
+              "ToolTip": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Views\\Nekretnina\\Details.cshtml",
+              "RelativeToolTip": "RealEstateHub\\Views\\Nekretnina\\Details.cshtml",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAwFUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T23:40:42.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "RealEstateHub\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\dzafi\\OneDrive\\Dokumenti\\GitHub\\Grupa6-Tim3\\Implementacija\\RealEstateHub\\RealEstateHub\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "RealEstateHub\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAADkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T23:11:15.175Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

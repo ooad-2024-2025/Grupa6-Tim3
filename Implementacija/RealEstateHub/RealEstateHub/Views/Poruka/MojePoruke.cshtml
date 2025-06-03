@@ -1,0 +1,31 @@
+﻿@model IEnumerable<RealEstateHub.Models.Poruka>
+
+<h2>Moje primljene poruke</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Pošiljalac</th>
+            <th>Poruka</th>
+            <th>Vrijeme slanja</th>
+            <th>Pročitano</th>
+            <th>Odgovori</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var poruka in Model)
+        {
+            <tr>
+                <td>@poruka.posiljalacId</td>
+                <td>@poruka.sadrzaj</td>
+                <td>@poruka.datumSlanja.ToString("dd.MM.yyyy HH:mm")</td>
+                <td>@(poruka.procitano ? "Da" : "Ne")</td>
+                <td>
+                    <a asp-action="Odgovori" asp-route-primalacId="@poruka.posiljalacId" asp-route-porukaId="@poruka.porukaId">Odgovori</a> |
+                    <a asp-action="Delete" asp-route-id="@poruka.porukaId">Obriši</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

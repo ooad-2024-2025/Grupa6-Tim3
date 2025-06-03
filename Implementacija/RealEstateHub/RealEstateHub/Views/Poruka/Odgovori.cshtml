@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Odgovori na poruku";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="Odgovori" method="post">
+    <input type="hidden" name="primalacId" value="@ViewData["PrimalacId"]" />
+
+    <div class="form-group">
+        <label for="sadrzaj">Unesite poruku</label>
+        <textarea class="form-control" id="sadrzaj" name="sadrzaj" rows="5" required></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Pošalji</button>
+    <a asp-action="MojePoruke" class="btn btn-secondary">Nazad</a>
+</form>

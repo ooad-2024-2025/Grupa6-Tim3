@@ -488,11 +488,13 @@ namespace RealEstateHub.Data.Migrations
                     b.Property<DateTime>("datumSlanja")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("posiljalacId")
-                        .HasColumnType("int");
+                    b.Property<string>("posiljalacId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("primalacId")
-                        .HasColumnType("int");
+                    b.Property<string>("primalacId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("procitano")
                         .HasColumnType("bit");
@@ -503,6 +505,10 @@ namespace RealEstateHub.Data.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.HasKey("porukaId");
+
+                    b.HasIndex("posiljalacId");
+
+                    b.HasIndex("primalacId");
 
                     b.ToTable("Poruka", (string)null);
                 });
@@ -635,6 +641,25 @@ namespace RealEstateHub.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("nekretnina");
+                });
+
+            modelBuilder.Entity("RealEstateHub.Models.Poruka", b =>
+                {
+                    b.HasOne("RealEstateHub.Models.ApplicationUser", "Posiljalac")
+                        .WithMany()
+                        .HasForeignKey("posiljalacId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RealEstateHub.Models.ApplicationUser", "Primalac")
+                        .WithMany()
+                        .HasForeignKey("primalacId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Posiljalac");
+
+                    b.Navigation("Primalac");
                 });
 
             modelBuilder.Entity("RealEstateHub.Models.Sesija", b =>

@@ -4,46 +4,62 @@
     ViewData["Title"] = "Registracija";
 }
 
-<h1 class="text-center mb-4">@ViewData["Title"]</h1>
-
 <div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-    <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" placeholder="Ime" />
-                <label asp-for="Input.FirstName">Ime</label>
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" placeholder="Prezime" />
-                <label asp-for="Input.LastName">Prezime</label>
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Broj telefona" />
-                <label asp-for="Input.PhoneNumber">Broj telefona</label>
-                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <!-- Naslov unutar kartice -->
+            <div class="card-header bg-white border-0 text-center pt-4">
+                <h2 class="h4 fw-semibold mb-0">@ViewData["Title"]</h2>
             </div>
 
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            <div class="card-body p-4">
+                <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.FirstName" class="form-control" placeholder="Ime" />
+                        <label asp-for="Input.FirstName">Ime</label>
+                        <span asp-validation-for="Input.FirstName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.LastName" class="form-control" placeholder="Prezime" />
+                        <label asp-for="Input.LastName">Prezime</label>
+                        <span asp-validation-for="Input.LastName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Broj telefona" />
+                        <label asp-for="Input.PhoneNumber">Broj telefona</label>
+                        <span asp-validation-for="Input.PhoneNumber" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                        <label asp-for="Input.Email">Email</label>
+                        <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Input.Password" class="form-control" type="password" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.Password">Lozinka</label>
+                        <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="Input.ConfirmPassword" class="form-control" type="password" autocomplete="new-password" aria-required="true" placeholder="password" />
+                        <label asp-for="Input.ConfirmPassword">Potvrdi lozinku</label>
+                        <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                    </div>
+
+                    <button id="registerSubmit" type="submit" class="btn btn-primary w-100 mb-2 py-2">Registruj se</button>
+
+                    <div class="text-center small">
+                        <p>Već imate nalog? <a asp-page="./Login" class="link-secondary text-decoration-none">Prijavite se</a></p>
+                    </div>
+                </form>
             </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Lozinka</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Potvrdi lozinku</label>
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registruj se</button>
-        </form>
+        </div>
     </div>
 </div>
 

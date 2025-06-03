@@ -25,7 +25,7 @@ namespace RealEstateHub.Data
         //public DbSet<Kategorija> Kategorija { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {      
+        {
             modelBuilder.Entity<FilterNekretnina>().ToTable("FilterNekretnina");
             modelBuilder.Entity<Korisnik>().ToTable("Korisnik");
             modelBuilder.Entity<Korisnik_Nekretnina>().ToTable("Korisnik_Nekretnina");
@@ -35,10 +35,26 @@ namespace RealEstateHub.Data
             modelBuilder.Entity<Obavjestenje>().ToTable("Obavjestenje");
             modelBuilder.Entity<Oglas>().ToTable("Oglas");
             modelBuilder.Entity<Poruka>().ToTable("Poruka");
+
+            // KONFIGURACIJA PORUKA - sprječavanje višestrukih kaskadnih putanja
+            modelBuilder.Entity<Poruka>()
+                .HasOne(p => p.Posiljalac)
+                .WithMany()
+                .HasForeignKey(p => p.posiljalacId)
+                .OnDelete(DeleteBehavior.Cascade);  
+
+            modelBuilder.Entity<Poruka>()
+                .HasOne(p => p.Primalac)
+                .WithMany()
+                .HasForeignKey(p => p.primalacId)
+                .OnDelete(DeleteBehavior.Restrict);  // sprječava višestruke kaskadne putanje za primaoca
+
             modelBuilder.Entity<Sesija>().ToTable("Sesija");
             modelBuilder.Entity<Vlasnik_Nekretnina>().ToTable("Vlasnik_Nekretnina");
+
             base.OnModelCreating(modelBuilder);
         }
+
 
 
     }

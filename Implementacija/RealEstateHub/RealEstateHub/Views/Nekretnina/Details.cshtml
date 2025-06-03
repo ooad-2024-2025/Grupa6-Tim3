@@ -3,52 +3,86 @@
 
 @{
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalji o nekretnini";
 }
 
-<h1>Detalji o nekretnini</h1>
+@if (TempData["PorukaStatus"] != null)
+{
+    <div class="alert alert-success text-center mb-4">@TempData["PorukaStatus"]</div>
+}
 
-<div>
-    @* Prikaz slike ako postoji *@
+<div class="container my-5">
+
+    <!-- Slika nekretnine kao hero -->
     @if (!string.IsNullOrEmpty(Model.Slika))
     {
-        <div class="mb-3">
-            <label>Slika nekretnine:</label><br />
-            <img src="@Model.Slika" alt="Slika nekretnine" style="max-width:400px; max-height:300px;" />
+        <div class="text-center mb-4">
+            <img src="@Model.Slika" alt="Slika nekretnine" class="img-fluid rounded shadow-sm" style="max-height: 450px; object-fit: cover;">
         </div>
     }
-</div>
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.naslov)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.naslov)</dd>
+    <div class="card shadow border-0">
+        <div class="card-body">
+            <h2 class="card-title text-primary fw-bold mb-4">@Model.naslov</h2>
 
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.opisNekretnine)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.opisNekretnine)</dd>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Opis:</strong> @Model.opisNekretnine</p>
+                    <p><strong>Lokacija:</strong> @Model.lokacija</p>
+                    <p><strong>Vrsta:</strong> @Model.vrstaNekretnine</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Cijena:</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
+                    <p><strong>Kvadratura:</strong> @Model.kvadratura m²</p>
+                    <p><strong>Broj soba:</strong> @Model.brojSoba</p>
+                </div>
+            </div>
 
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.cijena)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.cijena)</dd>
+            <div class="d-flex justify-content-between mt-4">
+                @if (Model.VlasnikId == currentUserId || User.IsInRole("Administrator"))
+                {
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                        <i class="fas fa-edit me-1"></i> Uredi
+                    </a>
+                }
+                <a asp-action="Index" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left me-1"></i> Vrati se na listu nekretnina
+                </a>
+            </div>
+        </div>
+    </div>
 
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.kvadratura)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.kvadratura)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.lokacija)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.lokacija)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.brojSoba)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.brojSoba)</dd>
-
-        <dt class="col-sm-2">@Html.DisplayNameFor(model => model.vrstaNekretnine)</dt>
-        <dd class="col-sm-10">@Html.DisplayFor(model => model.vrstaNekretnine)</dd>
-    </dl>
-</div>
-
-<div>
-    @if (Model.VlasnikId == currentUserId || User.IsInRole("Administrator"))
+    @* Forma za kontakt *@
+    @if (User.Identity.IsAuthenticated && Model.VlasnikId.ToString() != currentUserId)
     {
-        <a asp-action="Edit" asp-route-id="@Model?.Id">Uredi</a>
+        <div class="card shadow-sm mt-5">
+            <div class="card-body">
+                <h4 class="card-title text-primary">Kontaktiraj vlasnika</h4>
+                <form asp-controller="Poruka" asp-action="CreateFromNekretnina" method="post">
+                    <input type="hidden" name="primalacId" value="@Model.VlasnikId" />
+                    <input type="hidden" name="nekretninaId" value="@Model.Id" />
+
+                    <div class="form-group mb-3">
+                        <label for="sadrzaj">Poruka</label>
+                        <textarea class="form-control" name="sadrzaj" rows="4" required minlength="5" maxlength="200" placeholder="Unesite poruku vlasniku..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane me-1"></i> Pošalji poruku
+                    </button>
+                </form>
+            </div>
+        </div>
     }
-    <a asp-action="Index">Vrati se na listu nekretnina</a>
+    else if (!User.Identity.IsAuthenticated)
+    {
+        <div class="alert alert-info text-center mt-4">
+            <strong>Morate biti prijavljeni kako biste kontaktirali vlasnika.</strong>
+        </div>
+    }
+
 </div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+}
