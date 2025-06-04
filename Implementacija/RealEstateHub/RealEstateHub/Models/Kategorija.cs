@@ -2,17 +2,17 @@
 
 namespace RealEstateHub.Models{
     public enum Kategorija {
-        [Display(Name="Kuca")]
+        [Display(Name="Kuća")]
         KUCA,
         [Display(Name = "Stan")]
         STAN,
         [Display(Name = "Poslovni prostor")]
         POSLOVNI_PROSTOR,
-        [Display(Name = "Garaza")]
+        [Display(Name = "Garaža")]
         GARAZA,
         [Display(Name = "Vikendica")]
         VIKENDICA,
-        [Display(Name = "Zemljiste")]
+        [Display(Name = "Zemljište")]
         ZEMLJISTE
     }
 }

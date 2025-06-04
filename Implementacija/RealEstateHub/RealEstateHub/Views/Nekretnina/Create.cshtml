@@ -1,93 +1,93 @@
-﻿@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-@model RealEstateHub.Models.Nekretnina
+﻿@model RealEstateHub.Models.Nekretnina
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Dodaj nekretninu";
 }
 
-<h1 class="text-center">Dodaj nekretninu</h1>
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-white border-0 text-center pt-4">
+                <h2 class="h4 fw-semibold mb-0">@ViewData["Title"]</h2>
+            </div>
 
-<hr />
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        @* Uklonjen enctype="multipart/form-data" jer šaljemo Base64 string, ne fajl *@
-        <form asp-controller="Nekretnina" asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="naslov" class="control-label"></label>
-                <input asp-for="naslov" class="form-control" />
-                <span asp-validation-for="naslov" class="text-danger"></span>
+            <div class="card-body p-4">
+                <form asp-controller="Nekretnina" asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="naslov" class="form-control" placeholder="Naslov" />
+                        <label asp-for="naslov">Naslov</label>
+                        <span asp-validation-for="naslov" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="opisNekretnine" class="form-control" placeholder="Opis nekretnine" />
+                        <label asp-for="opisNekretnine">Opis nekretnine</label>
+                        <span asp-validation-for="opisNekretnine" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="cijena" class="form-control" placeholder="Cijena" />
+                        <label asp-for="cijena">Cijena</label>
+                        <span asp-validation-for="cijena" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="kvadratura" class="form-control" placeholder="Kvadratura" />
+                        <label asp-for="kvadratura">Kvadratura</label>
+                        <span asp-validation-for="kvadratura" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="lokacija" class="form-control" placeholder="Lokacija" />
+                        <label asp-for="lokacija">Lokacija</label>
+                        <span asp-validation-for="lokacija" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="brojSoba" class="form-control" placeholder="Broj soba" />
+                        <label asp-for="brojSoba">Broj soba</label>
+                        <span asp-validation-for="brojSoba" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <select asp-for="vrstaNekretnine" class="form-select" asp-items="Html.GetEnumSelectList<Kategorija>()"></select>
+                        <label asp-for="vrstaNekretnine">Vrsta nekretnine</label>
+                        <span asp-validation-for="vrstaNekretnine" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="slikaInput" class="form-label">Slika</label>
+                        <input type="file" id="slikaInput" class="form-control" accept="image/*" />
+                        <input type="hidden" asp-for="Slika" id="slikaBase64" />
+                        <span asp-validation-for="Slika" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2">Dodaj nekretninu</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="opisNekretnine" class="control-label"></label>
-                <input asp-for="opisNekretnine" class="form-control" />
-                <span asp-validation-for="opisNekretnine" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="cijena" class="control-label"></label>
-                <input asp-for="cijena" class="form-control" />
-                <span asp-validation-for="cijena" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="kvadratura" class="control-label"></label>
-                <input asp-for="kvadratura" class="form-control" />
-                <span asp-validation-for="kvadratura" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="lokacija" class="control-label"></label>
-                <input asp-for="lokacija" class="form-control" />
-                <span asp-validation-for="lokacija" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="brojSoba" class="control-label"></label>
-                <input asp-for="brojSoba" class="form-control" />
-                <span asp-validation-for="brojSoba" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="vrstaNekretnine" class="control-label"></label>
-                <select asp-for="vrstaNekretnine" class="form-control"
-                        asp-items="Html.GetEnumSelectList<Kategorija>()"></select>
-                <span asp-validation-for="vrstaNekretnine" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="slikaInput">Slika</label>
-                <input type="file" id="slikaInput" class="form-control" accept="image/*" />
-                @* Ovaj input će biti popunjen Base64 stringom iz JavaScripta i poslan sa formom *@
-                <input type="hidden" asp-for="Slika" id="slikaBase64" />
-                @* Validacija za Slika polje će sada raditi ako je potrebno *@
-                <span asp-validation-for="Slika" class="text-danger"></span>
-            </div>
-            <div class="form-group text-center">
-                <input type="submit" value="Dodaj nekretninu" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="link-secondary text-decoration-none">Vrati se na listu nekretnina</a>
+        </div>
     </div>
 </div>
 
-<div class="text-center mt-3">
-    <a asp-action="Index">Vrati se na listu nekretnina</a>
-</div>
-
-
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-
+    <partial name="_ValidationScriptsPartial" />
     <script>
         document.getElementById('slikaInput').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (!file) {
-                // Ako nema odabrane datoteke, postavi skriveno polje na prazan string
                 document.getElementById('slikaBase64').value = '';
                 return;
             }
 
             const reader = new FileReader();
             reader.onloadend = function () {
-                // Dodaj "data:MIME_TYPE;base64," prefiks za direktno prikazivanje u <img> tagu
-                const base64StringWithPrefix = reader.result;
-                document.getElementById('slikaBase64').value = base64StringWithPrefix;
+                document.getElementById('slikaBase64').value = reader.result;
             };
             reader.readAsDataURL(file);
         });

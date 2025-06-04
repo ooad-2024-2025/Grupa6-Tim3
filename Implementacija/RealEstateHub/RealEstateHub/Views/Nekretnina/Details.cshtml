@@ -1,9 +1,21 @@
 ﻿@model RealEstateHub.Models.Nekretnina
 @using System.Security.Claims
+@using System.ComponentModel.DataAnnotations 
+@using System.Reflection 
 
 @{
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
     ViewData["Title"] = "Detalji o nekretnini";
+
+    // Lokalna funkcija za dobijanje DisplayName
+    string GetEnumDisplayName(Enum enumValue)
+    {
+        return enumValue.GetType()
+                        .GetMember(enumValue.ToString())
+                        .FirstOrDefault()?
+                        .GetCustomAttribute<DisplayAttribute>()?
+                        .Name ?? enumValue.ToString();
+    }
 }
 
 @if (TempData["PorukaStatus"] != null)
@@ -13,7 +25,6 @@
 
 <div class="container my-5">
 
-    <!-- Slika nekretnine kao hero -->
     @if (!string.IsNullOrEmpty(Model.Slika))
     {
         <div class="text-center mb-4">
@@ -29,7 +40,7 @@
                 <div class="col-md-6">
                     <p><strong>Opis:</strong> @Model.opisNekretnine</p>
                     <p><strong>Lokacija:</strong> @Model.lokacija</p>
-                    <p><strong>Vrsta:</strong> @Model.vrstaNekretnine</p>
+                    <p><strong>Vrsta:</strong> @GetEnumDisplayName(Model.vrstaNekretnine)</p> 
                 </div>
                 <div class="col-md-6">
                     <p><strong>Cijena:</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>

@@ -1,59 +1,131 @@
 ﻿@model IEnumerable<RealEstateHub.Models.Nekretnina>
 @using System.Security.Claims
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
+@using System.Linq
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sve nekretnine";
     var currentUserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+
+    string GetEnumDisplayName(Enum enumValue)
+    {
+        return enumValue.GetType()
+                        .GetMember(enumValue.ToString())
+                        .FirstOrDefault()?
+                        .GetCustomAttribute<DisplayAttribute>()?
+                        .Name ?? enumValue.ToString();
+    }
 }
 
-<h1>Lista nekretnina</h1>
+<h1 class="text-center my-4">Aktivni oglasi</h1>
 
-<p>
-    <a asp-action="Create">Dodaj novu nekretninu</a>
+<p class="text-center mb-4">
+    <a asp-action="Create" class="btn btn-success">
+        <i class="fas fa-plus-circle me-1"></i> Dodaj novu nekretninu
+    </a>
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.naslov)</th>
-            <th>@Html.DisplayNameFor(model => model.opisNekretnine)</th>
-            <th>@Html.DisplayNameFor(model => model.cijena)</th>
-            <th>@Html.DisplayNameFor(model => model.kvadratura)</th>
-            <th>@Html.DisplayNameFor(model => model.lokacija)</th>
-            <th>@Html.DisplayNameFor(model => model.brojSoba)</th>
-            <th>@Html.DisplayNameFor(model => model.vrstaNekretnine)</th>
-            <th>Slika</th> <!-- Dodatni stupac -->
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.naslov)</td>
-                <td>@Html.DisplayFor(modelItem => item.opisNekretnine)</td>
-                <td>@Html.DisplayFor(modelItem => item.cijena)</td>
-                <td>@Html.DisplayFor(modelItem => item.kvadratura)</td>
-                <td>@Html.DisplayFor(modelItem => item.lokacija)</td>
-                <td>@Html.DisplayFor(modelItem => item.brojSoba)</td>
-                <td>@Html.DisplayFor(modelItem => item.vrstaNekretnine)</td>
-                <td>
-                    @if (!string.IsNullOrEmpty(item.Slika))
-                    {
-                        <img src="@item.Slika" alt="Slika nekretnine" style="max-width:100px; max-height:100px;" />
-                    }
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalji</a>
-                    @if (item.VlasnikId == currentUserId || User.IsInRole("Administrator"))
-                    {
-                        <nobr>|</nobr>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Uredi</a>
-                        <nobr>|</nobr>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Obriši</a>
-                    }
-                </td>
-            </tr>
+@if (Model != null && Model.Any())
+{
+    <div class="container my-5">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden property-card d-flex flex-column">
+                        @if (!string.IsNullOrEmpty(item.Slika))
+                        {
+                            <img src="@item.Slika" class="card-img-top property-img" alt="Slika nekretnine" style="height: 250px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="https://via.placeholder.com/400x250?text=Nema+Slike" class="card-img-top property-img" alt="Nema slike" style="height: 250px; object-fit: cover;">
+                        }
+                        <div class="card-body d-flex flex-column align-items-center text-center">
+                            <h5 class="card-title text-primary fw-bold">@Html.DisplayFor(modelItem => item.naslov)</h5>
+
+                            <div class="d-flex flex-wrap justify-content-center gap-3 text-muted small mb-3">
+                                <span><i class="fas fa-map-marker-alt me-1"></i>@item.lokacija</span>
+                                <span><i class="fas fa-ruler-combined me-1"></i>@item.kvadratura m²</span>
+                                <span class="fw-bold text-success"><i class="fas fa-money-bill-wave me-1"></i>@item.cijena KM</span>
+                                <span><i class="fas fa-tag me-1"></i>@GetEnumDisplayName(item.vrstaNekretnine)</span>
+                            </div>
+
+                            <div class="mt-auto d-flex justify-content-center gap-2 flex-wrap">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary btn-sm action-btn d-flex align-items-center gap-1">
+                                    <i class="fas fa-info-circle"></i> Detalji
+                                </a>
+
+                                @if (item.VlasnikId == currentUserId || User.IsInRole("Administrator"))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm action-btn d-flex align-items-center gap-1">
+                                        <i class="fas fa-edit"></i> Uredi
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm action-btn d-flex align-items-center gap-1">
+                                        <i class="fas fa-trash-alt"></i> Obriši
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info text-center my-5" role="alert">
+        <i class="fas fa-info-circle me-2"></i> Trenutno nema dostupnih nekretnina.
+    </div>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+}
+
+<style>
+    .property-card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .property-img {
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+
+    .card-title {
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
         }
-    </tbody>
-</table>
+
+    .text-primary {
+        color: #007bff !important;
+    }
+
+    .card-body {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .action-btn {
+        border-radius: 30px;
+        padding: 0.35rem 0.75rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        white-space: nowrap;
+    }
+</style>
