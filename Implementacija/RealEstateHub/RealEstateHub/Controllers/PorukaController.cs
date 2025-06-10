@@ -27,6 +27,7 @@ namespace RealEstateHub.Controllers
         }
 
         // GET: Poruka/Details/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,6 +46,7 @@ namespace RealEstateHub.Controllers
         }
 
         // GET: Poruka/Create
+        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +55,7 @@ namespace RealEstateHub.Controllers
         // POST: Poruka/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Create([Bind("porukaId,posiljalacId,primalacId,sadrzaj,procitano,datumSlanja")] Poruka poruka)
         {
             if (ModelState.IsValid)
@@ -65,6 +68,7 @@ namespace RealEstateHub.Controllers
         }
 
         // GET: Poruka/Edit/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace RealEstateHub.Controllers
         // POST: Poruka/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int id, [Bind("porukaId,posiljalacId,primalacId,sadrzaj,procitano,datumSlanja")] Poruka poruka)
         {
             if (id != poruka.porukaId)
@@ -114,6 +119,7 @@ namespace RealEstateHub.Controllers
         }
 
         // GET: Poruka/Delete/5
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -134,6 +140,7 @@ namespace RealEstateHub.Controllers
         // POST: Poruka/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var poruka = await _context.Poruka.FindAsync(id);

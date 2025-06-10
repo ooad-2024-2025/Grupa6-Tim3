@@ -9,34 +9,52 @@
 <div>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.minCijena)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.minCijena)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.maxCijena)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.maxCijena)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.brojSoba)
+
+        <dt class="col-sm-2">
+            Minimalan broj soba
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.brojSoba)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.minBrojSoba)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.kvadratura)
+
+        <dt class="col-sm-2">
+            Maksimalan broj soba
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.kvadratura)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.maxBrojSoba)
         </dd>
-        <dt class = "col-sm-2">
+
+        <dt class="col-sm-2">
+            Minimalna kvadratura
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.minKvadratura)
+        </dd>
+
+        <dt class="col-sm-2">
+            Maksimalna kvadratura
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.maxKvadratura)
+        </dd>
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.tipNekretnine)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.tipNekretnine)
         </dd>
     </dl>

@@ -19,10 +19,10 @@
                 @Html.DisplayNameFor(model => model.maxCijena)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.brojSoba)
+                Broj soba (min - max)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.kvadratura)
+                Kvadratura (min - max)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.tipNekretnine)
@@ -31,29 +31,30 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.minCijena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.maxCijena)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.brojSoba)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.kvadratura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tipNekretnine)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.filterNekretninaId">Uredi</a> |
-                <a asp-action="Details" asp-route-id="@item.filterNekretninaId">Detalji</a> |
-                <a asp-action="Delete" asp-route-id="@item.filterNekretninaId">Obriši</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.minCijena)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.maxCijena)
+                </td>
+                <td>
+                    @item.minBrojSoba - @item.maxBrojSoba
+                </td>
+                <td>
+                    @item.minKvadratura - @item.maxKvadratura
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tipNekretnine)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.filterNekretninaId">Uredi</a> |
+                    <a asp-action="Details" asp-route-id="@item.filterNekretninaId">Detalji</a> |
+                    <a asp-action="Delete" asp-route-id="@item.filterNekretninaId">Obriši</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

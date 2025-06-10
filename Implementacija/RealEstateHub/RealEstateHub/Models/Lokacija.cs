@@ -24,5 +24,10 @@ namespace RealEstateHub.Models{
         [Display(Name = "Longituda")]
         [RegularExpression(@"^\d+(\.\d+)?$", ErrorMessage = "Dozvoljeni su samo brojevi i tačka!")]
         public double longituda { get; set; }
+
+        internal char ToLower()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

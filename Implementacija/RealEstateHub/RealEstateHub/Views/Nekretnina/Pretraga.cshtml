@@ -1,0 +1,155 @@
+﻿@model RealEstateHub.Models.FilterNekretnina
+@using RealEstateHub.Models 
+
+@{
+    ViewData["Title"] = "Filtriraj nekretnine";
+}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-header bg-white border-0 text-center pt-4">
+                <h2 class="h4 fw-semibold mb-0">@ViewData["Title"]</h2>
+            </div>
+
+            <div class="card-body p-4">
+                <form asp-action="Pretraga" asp-controller="Nekretnina" method="post">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="minCijena">
+                                    <i class="fas fa-money-bill-wave me-2"></i>Minimalna cijena
+                                </label>
+                                <input asp-for="minCijena" class="form-control" placeholder="npr. 50000" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="maxCijena">
+                                    <i class="fas fa-money-bill-wave me-2"></i>Maksimalna cijena
+                                </label>
+                                <input asp-for="maxCijena" class="form-control" placeholder="npr. 200000" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="minBrojSoba">
+                                    <i class="fas fa-bed me-2"></i>Minimalan broj soba
+                                </label>
+                                <input asp-for="minBrojSoba" class="form-control" placeholder="npr. 1" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="maxBrojSoba">
+                                    <i class="fas fa-bed me-2"></i>Maksimalan broj soba
+                                </label>
+                                <input asp-for="maxBrojSoba" class="form-control" placeholder="npr. 5" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="minKvadratura">
+                                    <i class="fas fa-ruler-combined me-2"></i>Minimalna kvadratura (m²)
+                                </label>
+                                <input asp-for="minKvadratura" class="form-control" placeholder="npr. 30" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group mb-3">
+                                <label asp-for="maxKvadratura">
+                                    <i class="fas fa-ruler-combined me-2"></i>Maksimalna kvadratura (m²)
+                                </label>
+                                <input asp-for="maxKvadratura" class="form-control" placeholder="npr. 120" />
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-group mb-4">
+                                <label asp-for="tipNekretnine">
+                                    <i class="fas fa-tag me-2"></i>Tip nekretnine
+                                </label>
+                                <select asp-for="tipNekretnine" class="form-select" asp-items="Html.GetEnumSelectList<Kategorija>()">
+                                    <option value="">Odaberite...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 mb-3 py-2">
+                            <i class="fas fa-search me-2"></i>Pretraži
+                        </button>
+                    </div>
+                </form>
+
+                <div class="text-center">
+                    <a asp-action="Index" asp-controller="Nekretnina" class="btn btn-outline-secondary w-100 py-2">
+                        <i class="fas fa-arrow-left me-2"></i> Vrati se na listu nekretnina
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+}
+
+<style>
+    .card {
+        border-radius: 0.75rem;
+        border: none;
+    }
+
+    .card-header {
+        border-bottom: 0;
+    }
+
+    .card-body {
+        padding: 2rem !important; 
+    }
+
+    .form-group label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+        border: 1px solid #ced4da;
+        padding: 0.75rem 1rem;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+        }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        border-radius: 0.5rem;
+        font-weight: bold;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+    .btn-outline-secondary {
+        border-radius: 0.5rem;
+        font-weight: bold;
+        color: #6c757d;
+        border-color: #6c757d;
+    }
+
+        .btn-outline-secondary:hover {
+            background-color: #6c757d;
+            color: white;
+        }
+</style>

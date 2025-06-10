@@ -5,12 +5,10 @@
 @using System.Linq
 
 @{
-    ViewData["Title"] = "Sve nekretnine";
+    ViewData["Title"] = "Rezultati pretrage";
     var currentUserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
 
-    // Get the current sort order from the query string
-    var currentSortOrder = Context.Request.Query["sortOrder"];
-
+    // Ova funkcija je potrebna za prikaz DisplayName atributa za enumove
     string GetEnumDisplayName(Enum enumValue)
     {
         return enumValue.GetType()
@@ -21,31 +19,13 @@
     }
 }
 
-<h1 class="text-center my-4">Aktivni oglasi</h1>
+<h2 class="text-center my-4">@ViewData["Title"]</h2>
 
-<!-- Kombinovani dugmići za dodavanje i pretragu nekretnina -->
-<div class="d-flex justify-content-center gap-2 mb-4">
-    <a asp-action="Create" class="btn btn-success">
-        <i class="fas fa-plus-circle me-1"></i> Dodaj novu nekretninu
-    </a>
-    <a asp-action="Pretraga" class="btn btn-outline-primary">
-        <i class="fas fa-search me-1"></i> Pretraži nekretnine
-    </a>
-</div>
-
-<!-- Opcije za sortiranje, postavljene ispod dugmića i osigurano da budu u jednom redu -->
-<div class="mb-3 text-center">
-    <span>Sortiraj po: </span>
-    <a asp-action="Index" asp-route-sortOrder="cijena" class="mx-1 @(currentSortOrder == "cijena" ? "active-sort" : "")">Cijena ⬆</a> |
-    <a asp-action="Index" asp-route-sortOrder="cijena_desc" class="mx-1 @(currentSortOrder == "cijena_desc" ? "active-sort" : "")">Cijena ⬇</a> |
-    <a asp-action="Index" asp-route-sortOrder="kvadratura" class="mx-1 @(currentSortOrder == "kvadratura" ? "active-sort" : "")">Kvadratura ⬆</a> |
-    <a asp-action="Index" asp-route-sortOrder="kvadratura_desc" class="mx-1 @(currentSortOrder == "kvadratura_desc" ? "active-sort" : "")">Kvadratura ⬇</a> |
-    <a asp-action="Index" asp-route-sortOrder="sobe" class="mx-1 @(currentSortOrder == "sobe" ? "active-sort" : "")">Broj soba ⬆</a> |
-    <a asp-action="Index" asp-route-sortOrder="sobe_desc" class="mx-1 @(currentSortOrder == "sobe_desc" ? "active-sort" : "")">Broj soba ⬇</a>
-</div>
-
-
-@if (Model != null && Model.Any())
+@if (ViewBag.Poruka != null)
+{
+    <div class="alert alert-warning text-center">@ViewBag.Poruka</div>
+}
+else if (Model != null && Model.Any())
 {
     <div class="container my-5">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -97,13 +77,24 @@
 else
 {
     <div class="alert alert-info text-center my-5" role="alert">
-        <i class="fas fa-info-circle me-2"></i> Trenutno nema dostupnih nekretnina.
+        <i class="fas fa-info-circle me-2"></i> Trenutno nema dostupnih nekretnina koje odgovaraju vašim kriterijima pretrage.
     </div>
 }
 
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 }
+
+<div class="text-center my-4 d-flex justify-content-center gap-3">
+    <a asp-controller="Nekretnina" asp-action="Index" class="btn btn-secondary">
+        Vrati se na listu nekretnina
+    </a>
+    <a asp-controller="Nekretnina" asp-action="Pretraga" class="btn btn-secondary">
+        Vrati se na pretragu
+    </a>
+</div>
+
+
 
 <style>
     .property-card {
@@ -147,12 +138,5 @@ else
         padding: 0.35rem 0.75rem;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
         white-space: nowrap;
-    }
-
-    /* Nova stilizacija za aktivni filter */
-    .active-sort {
-        font-weight: bold;
-        color: #dc3545 !important; /* Crvena boja za aktivni filter */
-        text-decoration: underline;
     }
 </style>
