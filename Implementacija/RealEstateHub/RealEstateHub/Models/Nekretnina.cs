@@ -25,10 +25,11 @@ namespace RealEstateHub.Models{
         [RegularExpression(@"^\d+(\.\d+)?$", ErrorMessage = "Dozvoljeni su samo brojevi i tačka!")]
         public double kvadratura { get; set; }
 
+        /*
         [Display(Name = "Lokacija")]
         [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage =
             "Lokacija nekretnine smije imati između 5 i 50 znakova!")]
-        public string lokacija { get; set; }
+        public string lokacija { get; set; }*/
 
         [Display(Name = "Broj soba")]
         [Range(1, int.MaxValue, ErrorMessage = "Dozvoljeni su samo brojevi!")]
@@ -44,5 +45,7 @@ namespace RealEstateHub.Models{
         public ApplicationUser Vlasnik { get; set; }
 
         public string Slika { get; set; }
+
+        public Lokacija Lokacija { get; set; } = new Lokacija();
     }
 }

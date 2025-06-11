@@ -66,7 +66,9 @@ namespace RealEstateHub.Controllers
             }
 
             var nekretnina = await _context.Nekretnina
-                .FirstOrDefaultAsync(m => m.Id == id);
+             .Include(n => n.Lokacija)
+             .FirstOrDefaultAsync(m => m.Id == id);
+
             if (nekretnina == null)
             {
                 return NotFound();
@@ -84,21 +86,27 @@ namespace RealEstateHub.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Korisnik, Administrator")]
-        public async Task<IActionResult> Create(
-            [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine,Slika")] Nekretnina nekretnina)
+        public async Task<IActionResult> Create(Nekretnina nekretnina)
         {
-            ModelState.Remove("VlasnikId");
+            // Uklonimo Vlasnik koji se dodjeljuje automatski
             ModelState.Remove("Vlasnik");
+            ModelState.Remove("VlasnikId");
 
-            if (ModelState.IsValid)
+            // Ako forma nije ispravna, vrati prikaz sa greškama
+            if (!ModelState.IsValid)
             {
-                nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                _context.Add(nekretnina);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(nekretnina);
             }
-            return View(nekretnina);
+
+            // Dodjeljujemo trenutno prijavljenog korisnika kao vlasnika
+            nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Dodavanje u bazu
+            _context.Add(nekretnina);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
 
