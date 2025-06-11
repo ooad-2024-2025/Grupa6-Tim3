@@ -448,3 +448,8 @@ C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHu
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\RealEstateHub.pdb
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\RealEstateHub.genruntimeconfig.cache
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\ref\RealEstateHub.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\bin\Debug\net8.0\BouncyCastle.Cryptography.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\bin\Debug\net8.0\MailKit.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\bin\Debug\net8.0\MimeKit.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll

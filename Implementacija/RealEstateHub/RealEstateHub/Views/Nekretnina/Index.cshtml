@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RealEstateHub.Models.Nekretnina>
+﻿@model RealEstateHub.Models.PagedNekretnineViewModel
 @using System.Security.Claims
 @using System.ComponentModel.DataAnnotations
 @using System.Reflection
@@ -33,7 +33,7 @@
     </a>
 </div>
 
-<!-- Opcije za sortiranje, postavljene ispod dugmića i osigurano da budu u jednom redu -->
+<!-- Opcije za sortiranje -->
 <div class="mb-3 text-center">
     <span>Sortiraj po: </span>
     <a asp-action="Index" asp-route-sortOrder="cijena" class="mx-1 @(currentSortOrder == "cijena" ? "active-sort" : "")">Cijena ⬆</a> |
@@ -44,13 +44,12 @@
     <a asp-action="Index" asp-route-sortOrder="sobe_desc" class="mx-1 @(currentSortOrder == "sobe_desc" ? "active-sort" : "")">Broj soba ⬇</a>
 </div>
 
-
-@if (Model != null && Model.Any())
+@if (Model != null && Model.Nekretnine.Any())
 {
     <div class="container my-5">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Nekretnine)
             {
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden property-card d-flex flex-column">
@@ -90,8 +89,31 @@
                     </div>
                 </div>
             }
-        </div>
-    </div>
+        </div> <!-- kraj row -->
+    </div> <!-- kraj container -->
+
+    <!-- PAGINACIJA -->
+    @if (Model.TotalPages > 1)
+    {
+        <nav aria-label="Navigacija kroz stranice" class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage - 1)" asp-route-sortOrder="@currentSortOrder">Prethodna</a>
+                </li>
+
+                @for (int i = 1; i <= Model.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                        <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-sortOrder="@currentSortOrder">@i</a>
+                    </li>
+                }
+
+                <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@(Model.CurrentPage + 1)" asp-route-sortOrder="@currentSortOrder">Sljedeća</a>
+                </li>
+            </ul>
+        </nav>
+    }
 }
 else
 {
@@ -126,10 +148,10 @@ else
         border-color: #007bff;
     }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
-        }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
 
     .text-primary {
         color: #007bff !important;
@@ -148,7 +170,7 @@ else
         white-space: nowrap;
     }
 
-    /* Nova stilizacija za aktivni filter */
+    /* Stilizacija za aktivni filter */
     .active-sort {
         font-weight: bold;
         color: #dc3545 !important; /* Crvena boja za aktivni filter */

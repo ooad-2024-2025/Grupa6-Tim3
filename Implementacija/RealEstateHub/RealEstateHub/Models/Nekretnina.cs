@@ -47,5 +47,9 @@ namespace RealEstateHub.Models{
         public string Slika { get; set; }
 
         public Lokacija Lokacija { get; set; } = new Lokacija();
+
+        //dodano
+        public int BrojPregleda { get; set; } = 0;
+
     }
 }

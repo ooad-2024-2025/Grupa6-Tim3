@@ -18,7 +18,6 @@
     }
 }
 
-@* Sekcija za stilove - ovdje ide Leaflet CSS *@
 @section Styles {
     <link rel="stylesheet"
           href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -58,6 +57,8 @@
                     <p><strong>Cijena:</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
                     <p><strong>Kvadratura:</strong> @Model.kvadratura m²</p>
                     <p><strong>Broj soba:</strong> @Model.brojSoba</p>
+                    <p><strong>Adresa:</strong> @Model.Lokacija?.adresa</p>
+                    <p><strong>Grad:</strong> @Model.Lokacija?.grad</p>
                 </div>
             </div>
 
@@ -77,14 +78,36 @@
         </div>
     </div>
 
+    @if (ViewBag.BrojPregleda != null)
+    {
+        <div class="card shadow border-0 mt-4">
+            <div class="card-body">
+                <h5 class="card-title text-primary fw-bold mb-3">Pregledi nekretnine</h5>
+                <p class="card-text">
+                    Ovaj oglas je pregledan <strong>@ViewBag.BrojPregleda</strong> puta.
+                </p>
+            </div>
+        </div>
+    }
+
     @* Interaktivna mapa *@
     @if (Model.Lokacija != null)
     {
         <div class="mt-5">
             <h4 class="text-primary">Lokacija na mapi</h4>
-            <div id="map"
-                 class="rounded shadow-sm border"
-                 style="height: 400px;"></div>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div id="map"
+                     class="rounded shadow-sm border"
+                     style="height: 400px;"></div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    Prikaz lokacije na interaktivnoj mapi je moguć samo za registrovane korisnike.
+                </div>
+            }
         </div>
     }
 
@@ -125,7 +148,6 @@
             <strong>Morate biti prijavljeni da biste kontaktirali vlasnika.</strong>
         </div>
     }
-
 </div>
 
 @section Scripts {
@@ -137,35 +159,28 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin="anonymous"></script>
 
-    @if (Model.Lokacija != null)
+    @if (Model.Lokacija != null && User.Identity.IsAuthenticated)
     {
         <script>
-            // Koordinate se konvertuju s invariantnom kulturom da decimalni separator bude tačka
             var lat = @Model.Lokacija.latituda.ToString(System.Globalization.CultureInfo.InvariantCulture);
             var lon = @Model.Lokacija.longituda.ToString(System.Globalization.CultureInfo.InvariantCulture);
 
-            console.log("Latitude:", lat, "Longitude:", lon);
-
-            // Inicijalizacija mape
             var map = L.map('map').setView([lat, lon], 15);
 
-            // OpenStreetMap sloj - PROMIJENJEN URL ZA PLOČICE
-           L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', { // PROMJENA JE OVDJE: .openstreetmap.org -> .osm.org
+            L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '© OpenStreetMap doprinosioci'
-            }).addTo(map);          
+            }).addTo(map);
 
-            // Marker
             L.marker([lat, lon]).addTo(map)
                 .bindPopup('@Model.naslov - @Model.Lokacija.adresa')
                 .openPopup();
 
-            // Opcionalno: Onemogućiti scroll na mapi ako nije fokusirana
             map.scrollWheelZoom.disable();
             map.doubleClickZoom.disable();
             map.dragging.disable();
             map.keyboard.disable();
-            map.touchZoom.disable(); // Za touch uređaje
+            map.touchZoom.disable();
         </script>
     }
 }
