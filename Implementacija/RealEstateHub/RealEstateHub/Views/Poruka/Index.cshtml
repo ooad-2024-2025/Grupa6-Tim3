@@ -8,9 +8,6 @@
 
 <h1>Lista poruka</h1>
 
-<p>
-    <a asp-action="Create">Dodaj novu poruku</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -52,10 +49,14 @@
                     @Html.DisplayFor(modelItem => item.datumSlanja)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.porukaId">Uredi</a> |
-                    <a asp-action="Details" asp-route-id="@item.porukaId">Detalji</a> |
-                    <a asp-action="Delete" asp-route-id="@item.porukaId">Obriši</a>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @:<a asp-action="Edit" asp-route-id="@item.porukaId">Uredi</a> |
+                        @:<a asp-action="Details" asp-route-id="@item.porukaId">Detalji</a> |
+                        @:<a asp-action="Delete" asp-route-id="@item.porukaId">Obriši</a>
+                    }
                 </td>
+
             </tr>
         }
     </tbody>

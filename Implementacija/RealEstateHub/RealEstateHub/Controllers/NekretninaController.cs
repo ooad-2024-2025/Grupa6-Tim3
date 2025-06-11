@@ -1,14 +1,15 @@
-﻿using System;
-using System.Security.Claims;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using RealEstateHub.Data;
 using RealEstateHub.Models;
-using Microsoft.AspNetCore.Authorization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace RealEstateHub.Controllers
 {
@@ -22,12 +23,39 @@ namespace RealEstateHub.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-           
-            return View(await _context.Nekretnina.ToListAsync());
+            ViewData["CijenaSort"] = String.IsNullOrEmpty(sortOrder) ? "cijena_desc" : "";
+            ViewData["KvadraturaSort"] = sortOrder == "kvadratura" ? "kvadratura_desc" : "kvadratura";
+            ViewData["SobeSort"] = sortOrder == "sobe" ? "sobe_desc" : "sobe";
 
+            var nekretnine = from n in _context.Nekretnina select n;
+
+            switch (sortOrder)
+            {
+                case "cijena_desc":
+                    nekretnine = nekretnine.OrderByDescending(n => n.cijena);
+                    break;
+                case "kvadratura":
+                    nekretnine = nekretnine.OrderBy(n => n.kvadratura);
+                    break;
+                case "kvadratura_desc":
+                    nekretnine = nekretnine.OrderByDescending(n => n.kvadratura);
+                    break;
+                case "sobe":
+                    nekretnine = nekretnine.OrderBy(n => n.brojSoba);
+                    break;
+                case "sobe_desc":
+                    nekretnine = nekretnine.OrderByDescending(n => n.brojSoba);
+                    break;
+                default:
+                    nekretnine = nekretnine.OrderBy(n => n.cijena); // defaultno sortiranje po cijeni rastuće
+                    break;
+            }
+
+            return View(await nekretnine.ToListAsync());
         }
+
 
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
@@ -203,6 +231,51 @@ namespace RealEstateHub.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+        [AllowAnonymous]
+        public IActionResult Pretraga()
+        {
+            return View(new FilterNekretnina());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<IActionResult> Pretraga(FilterNekretnina filter)
+        {
+            var query = _context.Nekretnina.AsQueryable();
+
+            if (filter.minCijena > 0)
+                query = query.Where(n => n.cijena >= filter.minCijena);
+
+            if (filter.maxCijena > 0)
+                query = query.Where(n => n.cijena <= filter.maxCijena);
+
+            if (filter.minBrojSoba > 0)
+                query = query.Where(n => n.brojSoba >= filter.minBrojSoba);
+
+            if (filter.maxBrojSoba > 0)
+                query = query.Where(n => n.brojSoba <= filter.maxBrojSoba);
+
+            if (filter.minKvadratura > 0)
+                query = query.Where(n => n.kvadratura >= filter.minKvadratura);
+
+            if (filter.maxKvadratura > 0)
+                query = query.Where(n => n.kvadratura <= filter.maxKvadratura);
+          
+            query = query.Where(n => n.vrstaNekretnine == filter.tipNekretnine);
+
+            var rezultat = await query.ToListAsync();
+
+            if (!rezultat.Any())
+            {
+                ViewBag.Poruka = "Nema nekretnina koje zadovoljavaju kriterije.";
+            }
+
+            return View("RezultatiPretrage", rezultat);
+        }
+
+
 
         private bool NekretninaExists(int id)
         {
