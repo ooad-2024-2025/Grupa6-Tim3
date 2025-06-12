@@ -45,7 +45,7 @@ namespace RealEstateHub.Areas.Identity.Pages.Account
 
             code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code));
             var result = await _userManager.ConfirmEmailAsync(user, code);
-            StatusMessage = result.Succeeded ? "Hvala Vam na potvrđivanju maila." : "Greska u potvrđivanju maila.";
+            StatusMessage = result.Succeeded ? "Hvala na potvrđivanju maila!" : "Greška u potvrđivanju maila!";
             return Page();
         }
     }

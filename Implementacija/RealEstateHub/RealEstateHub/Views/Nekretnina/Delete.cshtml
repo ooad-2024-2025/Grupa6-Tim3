@@ -32,15 +32,17 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <p><strong>@Html.DisplayNameFor(m => m.naslov):</strong> @Model.naslov</p>
-                    <p><strong>@Html.DisplayNameFor(m => m.opisNekretnine):</strong> @Model.opisNekretnine</p>
-                    <p><strong>@Html.DisplayNameFor(m => m.lokacija):</strong> @Model.lokacija</p>
+                    <p><strong>@Html.DisplayNameFor(m => m.opisNekretnine):</strong> @Model.opisNekretnine</p>                    
                     <p><strong>@Html.DisplayNameFor(m => m.vrstaNekretnine):</strong> @GetEnumDisplayName(Model.vrstaNekretnine)</p>
                 </div>
-                <div class="col-md-6">
-                    <p><strong>@Html.DisplayNameFor(m => m.cijena):</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
-                    <p><strong>@Html.DisplayNameFor(m => m.kvadratura):</strong> @Model.kvadratura m²</p>
-                    <p><strong>@Html.DisplayNameFor(m => m.brojSoba):</strong> @Model.brojSoba</p>
-                </div>
+            <div class="col-md-6">
+                <p><strong>@Html.DisplayNameFor(m => m.cijena):</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
+                <p><strong>@Html.DisplayNameFor(m => m.kvadratura):</strong> @Model.kvadratura m²</p>
+                <p><strong>@Html.DisplayNameFor(m => m.brojSoba):</strong> @Model.brojSoba</p>
+                <p><strong>Adresa:</strong> @Model.Lokacija?.adresa</p>
+                <p><strong>Grad:</strong> @Model.Lokacija?.grad</p>
+            </div>
+
             </div>
 
             <form asp-action="Delete" method="post" class="text-center mt-4">

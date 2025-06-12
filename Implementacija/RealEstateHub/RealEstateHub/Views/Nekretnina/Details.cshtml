@@ -1,13 +1,13 @@
 ﻿@model RealEstateHub.Models.Nekretnina
 @using System.Security.Claims
-@using System.ComponentModel.DataAnnotations 
-@using System.Reflection 
+@using System.ComponentModel.DataAnnotations
+@using System.Reflection
 
 @{
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
     ViewData["Title"] = "Detalji o nekretnini";
 
-    // Lokalna funkcija za dobijanje DisplayName
+    // Lokalna funkcija za dobijanje prikaznog imena Enum vrijednosti
     string GetEnumDisplayName(Enum enumValue)
     {
         return enumValue.GetType()
@@ -18,6 +18,13 @@
     }
 }
 
+@section Styles {
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="anonymous" />
+}
+
 @if (TempData["PorukaStatus"] != null)
 {
     <div class="alert alert-success text-center mb-4">@TempData["PorukaStatus"]</div>
@@ -25,13 +32,18 @@
 
 <div class="container my-5">
 
+    @* Slika nekretnine *@
     @if (!string.IsNullOrEmpty(Model.Slika))
     {
         <div class="text-center mb-4">
-            <img src="@Model.Slika" alt="Slika nekretnine" class="img-fluid rounded shadow-sm" style="max-height: 450px; object-fit: cover;">
+            <img src="@Model.Slika"
+                 alt="Slika nekretnine"
+                 class="img-fluid rounded shadow-sm"
+                 style="max-height: 450px; object-fit: cover;" />
         </div>
     }
 
+    @* Kartica s osnovnim detaljima *@
     <div class="card shadow border-0">
         <div class="card-body">
             <h2 class="card-title text-primary fw-bold mb-4">@Model.naslov</h2>
@@ -39,43 +51,88 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <p><strong>Opis:</strong> @Model.opisNekretnine</p>
-                    <p><strong>Lokacija:</strong> @Model.lokacija</p>
-                    <p><strong>Vrsta:</strong> @GetEnumDisplayName(Model.vrstaNekretnine)</p> 
+                    <p><strong>Vrsta:</strong> @GetEnumDisplayName(Model.vrstaNekretnine)</p>
                 </div>
                 <div class="col-md-6">
                     <p><strong>Cijena:</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
                     <p><strong>Kvadratura:</strong> @Model.kvadratura m²</p>
                     <p><strong>Broj soba:</strong> @Model.brojSoba</p>
+                    <p><strong>Adresa:</strong> @Model.Lokacija?.adresa</p>
+                    <p><strong>Grad:</strong> @Model.Lokacija?.grad</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-between mt-4">
                 @if (Model.VlasnikId == currentUserId || User.IsInRole("Administrator"))
                 {
-                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-warning">
+                    <a asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-warning">
                         <i class="fas fa-edit me-1"></i> Uredi
                     </a>
                 }
                 <a asp-action="Index" class="btn btn-secondary">
-                    <i class="fas fa-arrow-left me-1"></i> Vrati se na listu nekretnina
+                    <i class="fas fa-arrow-left me-1"></i> Povratak na listu
                 </a>
             </div>
         </div>
     </div>
 
+    @if (ViewBag.BrojPregleda != null)
+    {
+        <div class="card shadow border-0 mt-4">
+            <div class="card-body">
+                <h5 class="card-title text-primary fw-bold mb-3">Pregledi nekretnine</h5>
+                <p class="card-text">
+                    Ovaj oglas je pregledan <strong>@ViewBag.BrojPregleda</strong> puta.
+                </p>
+            </div>
+        </div>
+    }
+
+    @* Interaktivna mapa *@
+    @if (Model.Lokacija != null)
+    {
+        <div class="mt-5">
+            <h4 class="text-primary">Lokacija na mapi</h4>
+
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div id="map"
+                     class="rounded shadow-sm border"
+                     style="height: 400px;"></div>
+            }
+            else
+            {
+                <div class="alert alert-warning">
+                    Prikaz lokacije na interaktivnoj mapi je moguć samo za registrovane korisnike.
+                </div>
+            }
+        </div>
+    }
+
     @* Forma za kontakt *@
-    @if (User.Identity.IsAuthenticated && Model.VlasnikId.ToString() != currentUserId)
+    @if (User.Identity.IsAuthenticated && Model.VlasnikId != currentUserId)
     {
         <div class="card shadow-sm mt-5">
             <div class="card-body">
                 <h4 class="card-title text-primary">Kontaktiraj vlasnika</h4>
-                <form asp-controller="Poruka" asp-action="CreateFromNekretnina" method="post">
+
+                <form asp-controller="Poruka"
+                      asp-action="CreateFromNekretnina"
+                      method="post">
                     <input type="hidden" name="primalacId" value="@Model.VlasnikId" />
                     <input type="hidden" name="nekretninaId" value="@Model.Id" />
 
                     <div class="form-group mb-3">
                         <label for="sadrzaj">Poruka</label>
-                        <textarea class="form-control" name="sadrzaj" rows="4" required minlength="5" maxlength="200" placeholder="Unesite poruku vlasniku..."></textarea>
+                        <textarea class="form-control"
+                              name="sadrzaj"
+                              rows="4"
+                              required
+                              minlength="5"
+                              maxlength="200"
+                              placeholder="Unesite poruku vlasniku..."></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary">
@@ -88,12 +145,42 @@
     else if (!User.Identity.IsAuthenticated)
     {
         <div class="alert alert-info text-center mt-4">
-            <strong>Morate biti prijavljeni kako biste kontaktirali vlasnika.</strong>
+            <strong>Morate biti prijavljeni da biste kontaktirali vlasnika.</strong>
         </div>
     }
-
 </div>
 
 @section Scripts {
+    @* Font Awesome *@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    @* Leaflet JS *@
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    @if (Model.Lokacija != null && User.Identity.IsAuthenticated)
+    {
+        <script>
+            var lat = @Model.Lokacija.latituda.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            var lon = @Model.Lokacija.longituda.ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+            var map = L.map('map').setView([lat, lon], 15);
+
+            L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap doprinosioci'
+            }).addTo(map);
+
+            L.marker([lat, lon]).addTo(map)
+                .bindPopup('@Model.naslov - @Model.Lokacija.adresa')
+                .openPopup();
+
+            map.scrollWheelZoom.disable();
+            map.doubleClickZoom.disable();
+            map.dragging.disable();
+            map.keyboard.disable();
+            map.touchZoom.disable();
+        </script>
+    }
 }

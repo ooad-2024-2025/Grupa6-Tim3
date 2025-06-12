@@ -13,5 +13,8 @@ namespace RealEstateHub.Models{
 
         [Display(Name = "Broj pregleda")]
         public int brojPregleda { get; set; }
+
+        public int nekretninaId { get; set; }
+
     }
 }

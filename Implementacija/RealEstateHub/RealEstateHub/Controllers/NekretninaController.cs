@@ -23,7 +23,7 @@ namespace RealEstateHub.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, int page = 1, int pageSize = 6)
         {
             ViewData["CijenaSort"] = String.IsNullOrEmpty(sortOrder) ? "cijena_desc" : "";
             ViewData["KvadraturaSort"] = sortOrder == "kvadratura" ? "kvadratura_desc" : "kvadratura";
@@ -31,6 +31,7 @@ namespace RealEstateHub.Controllers
 
             var nekretnine = from n in _context.Nekretnina select n;
 
+            // Sortiranje
             switch (sortOrder)
             {
                 case "cijena_desc":
@@ -49,11 +50,26 @@ namespace RealEstateHub.Controllers
                     nekretnine = nekretnine.OrderByDescending(n => n.brojSoba);
                     break;
                 default:
-                    nekretnine = nekretnine.OrderBy(n => n.cijena); // defaultno sortiranje po cijeni rastuće
+                    nekretnine = nekretnine.OrderBy(n => n.cijena);
                     break;
             }
 
-            return View(await nekretnine.ToListAsync());
+            // Paginacija
+            var totalItems = await nekretnine.CountAsync();
+            var items = await nekretnine
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            var viewModel = new PagedNekretnineViewModel
+            {
+                Nekretnine = items,
+                CurrentPage = page,
+                TotalPages = (int)Math.Ceiling(totalItems / (double)pageSize),
+                SortOrder = sortOrder
+            };
+
+            return View(viewModel);
         }
 
 
@@ -61,19 +77,35 @@ namespace RealEstateHub.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var nekretnina = await _context.Nekretnina
+                .Include(n => n.Lokacija)
+                .Include(n => n.Vlasnik)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (nekretnina == null)
-            {
                 return NotFound();
+
+            var currentUserId = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.NameIdentifier) : null;
+            bool isOwner = (currentUserId != null) && (nekretnina.VlasnikId == currentUserId);
+
+            // Povećaj broj pregleda SAMO ako nije vlasnik
+            if (!isOwner)
+            {
+                nekretnina.BrojPregleda++;
+                await _context.SaveChangesAsync();
             }
+
+            // Prikaz broja pregleda svima (ili možeš i ovdje po želji promijeniti)
+            ViewBag.BrojPregleda = isOwner ? nekretnina.BrojPregleda : (int?)null;
 
             return View(nekretnina);
         }
+
+
+
+
 
         [Authorize(Roles = "Korisnik, Administrator")]
         public IActionResult Create()
@@ -84,21 +116,27 @@ namespace RealEstateHub.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Korisnik, Administrator")]
-        public async Task<IActionResult> Create(
-            [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine,Slika")] Nekretnina nekretnina)
+        public async Task<IActionResult> Create(Nekretnina nekretnina)
         {
-            ModelState.Remove("VlasnikId");
+            // Uklonimo Vlasnik koji se dodjeljuje automatski
             ModelState.Remove("Vlasnik");
+            ModelState.Remove("VlasnikId");
 
-            if (ModelState.IsValid)
+            // Ako forma nije ispravna, vrati prikaz sa greškama
+            if (!ModelState.IsValid)
             {
-                nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-                _context.Add(nekretnina);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(nekretnina);
             }
-            return View(nekretnina);
+
+            // Dodjeljujemo trenutno prijavljenog korisnika kao vlasnika
+            nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            // Dodavanje u bazu
+            _context.Add(nekretnina);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -110,7 +148,10 @@ namespace RealEstateHub.Controllers
                 return NotFound();
             }
 
-            var nekretnina = await _context.Nekretnina.FindAsync(id);
+            var nekretnina = await _context.Nekretnina
+                .Include(n => n.Lokacija)
+                .FirstOrDefaultAsync(n => n.Id == id);
+
             if (nekretnina == null)
             {
                 return NotFound();
@@ -125,11 +166,11 @@ namespace RealEstateHub.Controllers
             return View(nekretnina);
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Korisnik, Administrator")]
-        public async Task<IActionResult> Edit(int id,
-            [Bind("Id,naslov,opisNekretnine,cijena,kvadratura,lokacija,brojSoba,vrstaNekretnine,Slika")] Nekretnina nekretnina)
+        public async Task<IActionResult> Edit(int id, Nekretnina nekretnina)
         {
             ModelState.Remove("VlasnikId");
             ModelState.Remove("Vlasnik");
@@ -139,7 +180,11 @@ namespace RealEstateHub.Controllers
                 return NotFound();
             }
 
-            var existingNekretnina = await _context.Nekretnina.AsNoTracking().FirstOrDefaultAsync(n => n.Id == id);
+            // Učitaj postojeću nekretninu sa Lokacijom
+            var existingNekretnina = await _context.Nekretnina
+                .Include(n => n.Lokacija)
+                .FirstOrDefaultAsync(n => n.Id == id);
+
             if (existingNekretnina == null)
             {
                 return NotFound();
@@ -151,34 +196,49 @@ namespace RealEstateHub.Controllers
                 return Forbid();
             }
 
-            nekretnina.VlasnikId = existingNekretnina.VlasnikId;
+            // Ažuriraj polja nekretnine
+            existingNekretnina.naslov = nekretnina.naslov;
+            existingNekretnina.opisNekretnine = nekretnina.opisNekretnine;
+            existingNekretnina.cijena = nekretnina.cijena;
+            existingNekretnina.kvadratura = nekretnina.kvadratura;
+            existingNekretnina.brojSoba = nekretnina.brojSoba;
+            existingNekretnina.vrstaNekretnine = nekretnina.vrstaNekretnine;
 
             if (string.IsNullOrEmpty(nekretnina.Slika))
             {
                 nekretnina.Slika = existingNekretnina.Slika;
             }
-
-            if (ModelState.IsValid)
+            else
             {
-                try
-                {
-                    _context.Update(nekretnina);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!NekretninaExists(nekretnina.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                existingNekretnina.Slika = nekretnina.Slika;
             }
-            return View(nekretnina);
+
+            // Ažuriraj polja Lokacije ako postoji
+            if (existingNekretnina.Lokacija != null && nekretnina.Lokacija != null)
+            {
+                existingNekretnina.Lokacija.grad = nekretnina.Lokacija.grad;
+                existingNekretnina.Lokacija.adresa = nekretnina.Lokacija.adresa;
+                existingNekretnina.Lokacija.latituda = nekretnina.Lokacija.latituda;
+                existingNekretnina.Lokacija.longituda = nekretnina.Lokacija.longituda;
+            }
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!NekretninaExists(nekretnina.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return RedirectToAction("Details", new { id = nekretnina.Id });
         }
 
         [Authorize(Roles = "Korisnik, Administrator")]

@@ -1,0 +1,19 @@
+# Build folderi
+bin/
+obj/
+
+# Visual Studio konfiguracija i cache
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Temporary i cache fajlovi
+*.pdb
+*.exe
+*.dll
+*.log
+*.v2
+*.dbcache
+*.vsidx

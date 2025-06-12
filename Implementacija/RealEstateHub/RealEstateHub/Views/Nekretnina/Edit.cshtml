@@ -40,11 +40,6 @@
                         <span asp-validation-for="kvadratura" class="text-danger small"></span>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="lokacija" class="form-control" placeholder="Lokacija" />
-                        <label asp-for="lokacija">Lokacija</label>
-                        <span asp-validation-for="lokacija" class="text-danger small"></span>
-                    </div>
 
                     <div class="form-floating mb-3">
                         <input asp-for="brojSoba" class="form-control" placeholder="Broj soba" />
@@ -56,6 +51,30 @@
                         <select asp-for="vrstaNekretnine" class="form-select" asp-items="Html.GetEnumSelectList<Kategorija>()"></select>
                         <label asp-for="vrstaNekretnine">Vrsta nekretnine</label>
                         <span asp-validation-for="vrstaNekretnine" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Lokacija.grad" class="form-control" placeholder="Grad" />
+                        <label asp-for="Lokacija.grad">Grad</label>
+                        <span asp-validation-for="Lokacija.grad" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Lokacija.adresa" class="form-control" placeholder="Adresa" />
+                        <label asp-for="Lokacija.adresa">Adresa</label>
+                        <span asp-validation-for="Lokacija.adresa" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Lokacija.latituda" class="form-control" placeholder="Latituda" />
+                        <label asp-for="Lokacija.latituda">Latituda</label>
+                        <span asp-validation-for="Lokacija.latituda" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input asp-for="Lokacija.longituda" class="form-control" placeholder="Longituda" />
+                        <label asp-for="Lokacija.longituda">Longituda</label>
+                        <span asp-validation-for="Lokacija.longituda" class="text-danger small"></span>
                     </div>
 
                     <div class="mb-3">
