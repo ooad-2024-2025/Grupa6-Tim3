@@ -322,7 +322,7 @@ namespace RealEstateHub.Controllers
 
             if (filter.maxKvadratura > 0)
                 query = query.Where(n => n.kvadratura <= filter.maxKvadratura);
-          
+
             query = query.Where(n => n.vrstaNekretnine == filter.tipNekretnine);
 
             var rezultat = await query.ToListAsync();

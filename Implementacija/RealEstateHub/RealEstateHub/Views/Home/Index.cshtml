@@ -3,12 +3,15 @@
 @using System.Reflection
 
 @{
-    ViewData["Title"] = "Početna stranica";    
+    ViewData["Title"] = "Početna stranica";
+    var sveSaLokacijom = ViewBag.SveSaLokacijom as List<RealEstateHub.Models.Nekretnina>;
 }
 
-<div class="hero-section text-white text-center py-5 mb-5" style="background: url('@Url.Content("~/images/pocetna.jpg")') no-repeat center center; background-size: cover; position: relative;">
+<div class="hero-section text-white text-center py-5 mb-5"
+     style="background: url('@Url.Content("~/images/pocetna.jpg")') no-repeat center center; background-size: cover; position: relative;">
     <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
-    <div class="container d-flex flex-column justify-content-center align-items-center" style="position: relative; z-index: 1; min-height: inherit;">
+    <div class="container d-flex flex-column justify-content-center align-items-center"
+         style="position: relative; z-index: 1; min-height: inherit;">
         <h1 class="display-3 fw-bold mb-3">Dobrodošli u svijet nekretnina!</h1>
         <p class="lead mb-4">Otkrijte raznolikost nekretnina i pronađite savršeno mjesto za život ili investiciju</p>
     </div>
@@ -44,14 +47,13 @@
                         {
                             <img src="https://via.placeholder.com/400x250?text=Nema+Slike" class="card-img-top property-img" alt="Nema slike" style="height: 250px; object-fit: cover;">
                         }
+
                         <div class="card-body d-flex flex-column align-items-center text-center">
                             <h5 class="card-title text-primary fw-bold">@Html.DisplayFor(modelItem => item.naslov)</h5>
-
-                            <div class="d-flex flex-wrap justify-content-center gap-3 text-muted small mb-3">                                
+                            <div class="d-flex flex-wrap justify-content-center gap-3 text-muted small mb-3">
                                 <span><i class="fas fa-ruler-combined me-1"></i>@item.kvadratura m²</span>
-                                <span class="fw-bold text-success"><i class="fas fa-money-bill-wave me-1"></i>@item.cijena KM</span>                                
+                                <span class="fw-bold text-success"><i class="fas fa-money-bill-wave me-1"></i>@item.cijena KM</span>
                             </div>
-
                             <a asp-controller="Nekretnina" asp-action="Details" asp-route-id="@item.Id"
                                class="btn btn-primary rounded-pill px-4 py-2 shadow-sm mt-auto d-flex align-items-center justify-content-center gap-2">
                                 <i class="fas fa-info-circle"></i> <span>Detalji</span>
@@ -76,8 +78,58 @@
     </div>
 </div>
 
+@if (User.Identity.IsAuthenticated)
+{
+    if (sveSaLokacijom != null && sveSaLokacijom.Any())
+    {
+        <div class="container mt-5 mb-5">
+            <h2 class="text-center mb-4">Mapa svih nekretnina</h2>
+            <div id="map" style="height: 500px;" class="border rounded shadow-sm"></div>
+        </div>
+    }
+}
+else
+{
+    <div class="container mt-5 mb-5">
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Samo prijavljeni korisnici mogu vidjeti prikaz nekretnina na mapi.
+        </div>
+    </div>
+}
+
+
 @section Scripts {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    <script>
+        var map = L.map('map').setView([44.0, 17.0], 7);
+        L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var nekretnine = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(sveSaLokacijom));
+
+        nekretnine.forEach(function (n) {
+                    if (n.Lokacija && n.Lokacija.latituda && n.Lokacija.longituda) {
+            var marker = L.marker([n.Lokacija.latituda, n.Lokacija.longituda]).addTo(map);
+            var popup = `<strong>${n.naslov}</strong><br/><a href="/Nekretnina/Details/${n.Id}">Detalji</a>`;
+            marker.bindPopup(popup);
+        }
+
+        });
+    </script>
+}
+
+@section Styles {
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="anonymous" />
 }
 
 <style>
@@ -87,10 +139,6 @@
         align-items: center;
         justify-content: center;
         text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    }
-
-    .property-card {
-        /* Stilovi za kartice ako želiš efekte */
     }
 
     .property-img {

@@ -36,5 +36,8 @@ namespace RealEstateHub.Models
 
         [Display(Name = "Lokacija")]
         public Lokacija lokacija { get; set; }
+        public string KorisnikId { get; set; }
+
+
     }
 }

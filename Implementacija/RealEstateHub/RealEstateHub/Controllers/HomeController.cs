@@ -20,16 +20,24 @@ namespace RealEstateHub.Controllers
             _context = context; 
         }
 
-        // Ažuriraj Index akciju da dohvati tri najnovije nekretnine
+        // Ažuriraj Index akciju da dohvati tri najnovije nekretnine i prikaze mapu
         public async Task<IActionResult> Index()
         {
-            // Dohvati tri najnovije nekretnine po ID-u (pretpostavljamo da je veæi ID noviji unos)
-            var najnovijeNekretnine = await _context.Nekretnina
-                                                .OrderByDescending(n => n.Id)
-                                                .Take(3)
-                                                .ToListAsync();
-            return View(najnovijeNekretnine); 
+            var najnovije = await _context.Nekretnina
+                .OrderByDescending(n => n.Id)
+                .Take(3)
+                .ToListAsync();
+
+            var saLokacijom = await _context.Nekretnina
+                .Include(n => n.Lokacija)
+                .Where(n => n.Lokacija != null && n.Lokacija.latituda != 0 && n.Lokacija.longituda != 0)
+                .ToListAsync();
+
+            ViewBag.SveSaLokacijom = saLokacijom;
+
+            return View(najnovije);
         }
+
 
         public IActionResult Privacy()
         {

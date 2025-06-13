@@ -15,5 +15,7 @@ namespace RealEstateHub.Models{
 
         [Display(Name = "Kriterij")]
         public Kriterij kriterij { get; set; }
+
+        public ApplicationUser Korisnik { get; set; }
     }
 }
