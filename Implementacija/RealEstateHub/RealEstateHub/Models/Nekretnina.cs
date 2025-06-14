@@ -8,8 +8,8 @@ namespace RealEstateHub.Models{
         [Display(Name = "Naslov")]
         [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage =
             "Naziv nekretnine smije imati između 5 i 50 znakova!")]
-        [RegularExpression(@"[0-9| |a-z|A-Z]*", ErrorMessage =
-            "Dozvoljeno je samo korištenje velikih i malih slova, brojeva i razmaka!")]
+        [RegularExpression(@"^[0-9a-zA-Z ,\-]*$", ErrorMessage =
+            "Dozvoljena su samo slova, brojevi, razmaci, zarezi i crte!")]
         public string naslov { get; set; }
 
         [Display(Name = "Opis nekretnine")]
@@ -32,7 +32,7 @@ namespace RealEstateHub.Models{
         public string lokacija { get; set; }*/
 
         [Display(Name = "Broj soba")]
-        [Range(1, int.MaxValue, ErrorMessage = "Dozvoljeni su samo brojevi!")]
+        [Range(0, int.MaxValue, ErrorMessage = "Dozvoljeni su samo brojevi!")]
         public int brojSoba { get; set; }
 
         [Display(Name = "Vrsta nekretnine")]
