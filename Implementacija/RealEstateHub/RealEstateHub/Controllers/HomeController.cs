@@ -24,6 +24,7 @@ namespace RealEstateHub.Controllers
         public async Task<IActionResult> Index()
         {
             var najnovije = await _context.Nekretnina
+                .Include(n => n.Slike) // uèitavamo slike zajedno s nekretninama
                 .OrderByDescending(n => n.Id)
                 .Take(3)
                 .ToListAsync();

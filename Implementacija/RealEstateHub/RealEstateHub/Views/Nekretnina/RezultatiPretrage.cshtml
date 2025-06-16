@@ -6,9 +6,8 @@
 
 @{
     ViewData["Title"] = "Rezultati pretrage";
-    var currentUserId = User.FindFirstValue(System.Security.Claims.ClaimTypes.NameIdentifier);
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-    // Ova funkcija je potrebna za prikaz DisplayName atributa za enumove
     string GetEnumDisplayName(Enum enumValue)
     {
         return enumValue.GetType()
@@ -34,18 +33,19 @@ else if (Model != null && Model.Any())
             {
                 <div class="col">
                     <div class="card h-100 shadow-sm border-0 rounded-lg overflow-hidden property-card d-flex flex-column">
-                        @if (!string.IsNullOrEmpty(item.Slika))
+                        @if (item.Slike != null && item.Slike.Any())
                         {
-                            <img src="@item.Slika" class="card-img-top property-img" alt="Slika nekretnine" style="height: 250px; object-fit: cover;">
+                            <img src="@item.Slike.First().Putanja" class="card-img-top property-img" alt="Slika nekretnine" style="height: 250px; object-fit: cover;" />
                         }
                         else
                         {
-                            <img src="https://via.placeholder.com/400x250?text=Nema+Slike" class="card-img-top property-img" alt="Nema slike" style="height: 250px; object-fit: cover;">
+                            <img src="https://via.placeholder.com/400x250?text=Nema+slike" class="card-img-top property-img" alt="Nema slike" style="height: 250px; object-fit: cover;" />
                         }
-                        <div class="card-body d-flex flex-column align-items-center text-center">
-                            <h5 class="card-title text-primary fw-bold">@Html.DisplayFor(modelItem => item.naslov)</h5>
 
-                            <div class="d-flex flex-wrap justify-content-center gap-3 text-muted small mb-3">                                
+                        <div class="card-body d-flex flex-column align-items-center text-center">
+                            <h5 class="card-title text-primary fw-bold">@item.naslov</h5>
+
+                            <div class="d-flex flex-wrap justify-content-center gap-3 text-muted small mb-3">
                                 <span><i class="fas fa-ruler-combined me-1"></i>@item.kvadratura m²</span>
                                 <span class="fw-bold text-success"><i class="fas fa-money-bill-wave me-1"></i>@item.cijena KM</span>
                                 <span><i class="fas fa-tag me-1"></i>@GetEnumDisplayName(item.vrstaNekretnine)</span>
@@ -92,8 +92,6 @@ else
         Vrati se na pretragu
     </a>
 </div>
-
-
 
 <style>
     .property-card {

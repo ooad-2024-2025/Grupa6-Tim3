@@ -12,9 +12,10 @@
             </div>
 
             <div class="card-body p-4">
-                <form asp-action="Edit" method="post" enctype="multipart/form-data">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
+                <form asp-controller="Nekretnina" asp-action="Edit" method="post" enctype="multipart/form-data">
                     <input type="hidden" asp-for="Id" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" role="alert"></div>
 
                     <div class="form-floating mb-3">
                         <input asp-for="naslov" class="form-control" placeholder="Naslov" />
@@ -39,7 +40,6 @@
                         <label asp-for="kvadratura">Kvadratura</label>
                         <span asp-validation-for="kvadratura" class="text-danger small"></span>
                     </div>
-
 
                     <div class="form-floating mb-3">
                         <input asp-for="brojSoba" class="form-control" placeholder="Broj soba" />
@@ -78,45 +78,53 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="slikaInput" class="form-label">Slika</label>
-                        <input type="file" id="slikaInput" class="form-control" accept="image/*" />
-                        <input type="hidden" asp-for="Slika" id="slikaBase64" />
-                        <span asp-validation-for="Slika" class="text-danger small"></span>
-
-                        @if (!string.IsNullOrEmpty(Model.Slika))
-                        {
-                            <div class="mt-2 text-center">
-                                <p>Trenutna slika:</p>
-                                <img src="@Model.Slika" alt="Trenutna slika nekretnine" style="max-width:150px; max-height:150px; border-radius:8px;" />
-                            </div>
-                        }
+                        <label class="form-label">Trenutne slike nekretnine</label>
+                        <div class="d-flex flex-wrap gap-2 mb-2">
+                            @if (Model.Slike != null && Model.Slike.Any())
+                            {
+                                foreach (var slika in Model.Slike)
+                                {
+                                    <img src="@slika.Putanja" alt="Slika nekretnine" class="img-thumbnail" style="max-height: 100px;" />
+                                }
+                            }
+                            else
+                            {
+                                <span class="text-muted">Nema dodanih slika.</span>
+                            }
+                        </div>
                     </div>
 
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary py-2">Sačuvaj</button>
+                    <div class="mb-3">
+                        <label for="novaSlika" class="form-label">Dodaj novu sliku</label>
+                        <input type="file" id="novaSlika" class="form-control" accept="image/*" />
+                        <input type="hidden" name="NovaSlikaBase64" id="novaSlikaBase64" />
+                        <span asp-validation-for="Slike" class="text-danger small"></span>
                     </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2">Sačuvaj promjene</button>
                 </form>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="text-center mt-3">
-    <a asp-action="Index" class="link-secondary text-decoration-none">Vrati se na listu nekretnina</a>
+        <div class="text-center mt-3">
+            <a asp-action="Index" class="link-secondary text-decoration-none">Vrati se na listu nekretnina</a>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        document.getElementById('slikaInput').addEventListener('change', function (event) {
+        document.getElementById('novaSlika').addEventListener('change', function (event) {
             const file = event.target.files[0];
             if (!file) {
-                document.getElementById('slikaBase64').value = '';
+                document.getElementById('novaSlikaBase64').value = '';
                 return;
             }
+
             const reader = new FileReader();
             reader.onloadend = function () {
-                document.getElementById('slikaBase64').value = reader.result;
+                document.getElementById('novaSlikaBase64').value = reader.result;
             };
             reader.readAsDataURL(file);
         });

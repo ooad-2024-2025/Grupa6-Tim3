@@ -7,6 +7,7 @@
     var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
     ViewData["Title"] = "Izbriši nekretninu";
 
+    // Lokalna funkcija za dobijanje prikaznog imena Enum vrijednosti
     string GetEnumDisplayName(Enum enumValue)
     {
         return enumValue.GetType()
@@ -17,32 +18,56 @@
     }
 }
 
+<div class="container my-4">
+
+    <h2 class="text-center mb-4">Da li ste sigurni da želite obrisati ovu nekretninu?</h2>
+
+    @* Carousel sa svim slikama nekretnine *@
+    @if (Model.Slike != null && Model.Slike.Any())
+    {
+        <div id="deletePropertyCarousel" class="carousel slide mb-4" data-bs-ride="carousel" style="max-height: 350px;">
+            <div class="carousel-inner" style="max-height: 350px;">
+                @for (int i = 0; i < Model.Slike.Count; i++)
+                {
+                    var slika = Model.Slike[i];
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="@slika.Putanja" class="d-block w-100 rounded shadow-sm" alt="Slika nekretnine" style="max-height: 350px; object-fit: cover;">
+                    </div>
+                }
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#deletePropertyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Prethodna</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#deletePropertyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Sljedeća</span>
+            </button>
+        </div>
+    }
+    else
+    {
+        <div class="text-center mb-4">
+            <img src="https://via.placeholder.com/400x250?text=Nema+Slike" class="img-fluid rounded shadow-sm" alt="Nema slike" style="max-height: 350px; object-fit: cover;" />
+        </div>
+    }
+
     <div class="card shadow border-0">
         <div class="card-body">
-
-            <h3 class="text-center mb-4">Da li ste sigurni da želite obrisati ovu nekretninu?</h3>
-
-            @if (!string.IsNullOrEmpty(Model.Slika))
-            {
-                <div class="text-center mb-4">
-                    <img src="@Model.Slika" alt="Slika nekretnine" class="img-fluid rounded shadow-sm" style="max-height: 350px; object-fit: cover;" />
-                </div>
-            }
 
             <div class="row mb-3">
                 <div class="col-md-6">
                     <p><strong>@Html.DisplayNameFor(m => m.naslov):</strong> @Model.naslov</p>
-                    <p><strong>@Html.DisplayNameFor(m => m.opisNekretnine):</strong> @Model.opisNekretnine</p>                    
+                    <p><strong>@Html.DisplayNameFor(m => m.opisNekretnine):</strong> @Model.opisNekretnine</p>
                     <p><strong>@Html.DisplayNameFor(m => m.vrstaNekretnine):</strong> @GetEnumDisplayName(Model.vrstaNekretnine)</p>
                 </div>
-            <div class="col-md-6">
-                <p><strong>@Html.DisplayNameFor(m => m.cijena):</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
-                <p><strong>@Html.DisplayNameFor(m => m.kvadratura):</strong> @Model.kvadratura m²</p>
-                <p><strong>@Html.DisplayNameFor(m => m.brojSoba):</strong> @Model.brojSoba</p>
-                <p><strong>Adresa:</strong> @Model.Lokacija?.adresa</p>
-                <p><strong>Grad:</strong> @Model.Lokacija?.grad</p>
-            </div>
-
+                <div class="col-md-6">
+                    <p><strong>@Html.DisplayNameFor(m => m.cijena):</strong> <span class="text-success fw-bold">@Model.cijena KM</span></p>
+                    <p><strong>@Html.DisplayNameFor(m => m.kvadratura):</strong> @Model.kvadratura m²</p>
+                    <p><strong>@Html.DisplayNameFor(m => m.brojSoba):</strong> @Model.brojSoba</p>
+                    <p><strong>Adresa:</strong> @Model.Lokacija?.adresa</p>
+                    <p><strong>Grad:</strong> @Model.Lokacija?.grad</p>
+                </div>
             </div>
 
             <form asp-action="Delete" method="post" class="text-center mt-4">
@@ -56,8 +81,10 @@
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 }

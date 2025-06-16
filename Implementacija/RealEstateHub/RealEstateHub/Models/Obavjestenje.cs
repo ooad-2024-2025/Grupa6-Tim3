@@ -1,7 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RealEstateHub.Models{
-    public class Obavjestenje{
+namespace RealEstateHub.Models
+{
+    public class Obavjestenje
+    {
         public int obavjestenjeId { get; set; }
         public int korisnikId { get; set; }
 
@@ -15,7 +17,5 @@ namespace RealEstateHub.Models{
 
         [Display(Name = "Kriterij")]
         public Kriterij kriterij { get; set; }
-
-        public ApplicationUser Korisnik { get; set; }
     }
 }

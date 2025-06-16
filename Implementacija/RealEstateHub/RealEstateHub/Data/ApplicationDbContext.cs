@@ -21,6 +21,8 @@ namespace RealEstateHub.Data
         public DbSet<Poruka> Poruka { get; set; }
         public DbSet<Sesija> Sesija { get; set; }
         public DbSet<Vlasnik_Nekretnina> Vlasnik_Nekretnina { get; set; }
+        public DbSet<SlikaNekretnine> SlikeNekretnine { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -33,6 +35,13 @@ namespace RealEstateHub.Data
             modelBuilder.Entity<Obavjestenje>().ToTable("Obavjestenje");
             modelBuilder.Entity<Oglas>().ToTable("Oglas");
             modelBuilder.Entity<Poruka>().ToTable("Poruka");
+
+            modelBuilder.Entity<SlikaNekretnine>()
+            .HasOne(s => s.Nekretnina)
+            .WithMany(n => n.Slike)
+            .HasForeignKey(s => s.NekretninaId)
+            .OnDelete(DeleteBehavior.Cascade); // ili .Restrict ako ne želiš automatsko brisanje
+
 
             // KONFIGURACIJA PORUKA - sprječavanje višestrukih kaskadnih putanja
             modelBuilder.Entity<Poruka>()
@@ -49,15 +58,14 @@ namespace RealEstateHub.Data
 
             modelBuilder.Entity<Sesija>().ToTable("Sesija");
             modelBuilder.Entity<Vlasnik_Nekretnina>().ToTable("Vlasnik_Nekretnina");
-
-            // DODAJ OVO ZA RELACIJU NEKRETNINA - LOKACIJA
+        
             modelBuilder.Entity<Nekretnina>()
-                .HasOne(n => n.Lokacija)      // Nekretnina ima jednu Lokaciju
-                .WithOne(l => l.Nekretnina)   // Lokacija ima jednu Nekretninu
+                .HasOne(n => n.Lokacija)      
+                .WithOne(l => l.Nekretnina)   
                 .HasForeignKey<Lokacija>(l => l.nekretninaId) // Strani ključ je u Lokacija modelu
-                .OnDelete(DeleteBehavior.Cascade); // Opcionalno: briše lokaciju ako se obriše nekretnina
+                .OnDelete(DeleteBehavior.Cascade);
 
-            base.OnModelCreating(modelBuilder); // VAŽNO: base.OnModelCreating pozvati NA KRAJU
+            base.OnModelCreating(modelBuilder); 
         }
     }
 }

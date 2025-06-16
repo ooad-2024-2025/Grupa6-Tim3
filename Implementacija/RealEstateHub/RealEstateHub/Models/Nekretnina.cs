@@ -44,7 +44,15 @@ namespace RealEstateHub.Models{
         [ForeignKey("VlasnikId")]
         public ApplicationUser Vlasnik { get; set; }
 
-        public string Slika { get; set; }
+        //public string Slika { get; set; }
+
+        public List<SlikaNekretnine> Slike { get; set; } = new List<SlikaNekretnine>();
+
+        // Ovo nije mapirano u bazu, služi samo za primanje Base64 stringova iz forme
+        [NotMapped]
+        public IFormFile[] UploadaneSlike { get; set; }
+
+
 
         public Lokacija Lokacija { get; set; } = new Lokacija();
 

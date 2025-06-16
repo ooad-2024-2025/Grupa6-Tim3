@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using RealEstateHub.Data;
 using RealEstateHub.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -29,7 +29,9 @@ namespace RealEstateHub.Controllers
             ViewData["KvadraturaSort"] = sortOrder == "kvadratura" ? "kvadratura_desc" : "kvadratura";
             ViewData["SobeSort"] = sortOrder == "sobe" ? "sobe_desc" : "sobe";
 
-            var nekretnine = from n in _context.Nekretnina select n;
+            var nekretnine = _context.Nekretnina
+                .Include(n => n.Slike) // Učitaj slike da budu dostupne u view-u
+                .AsQueryable();
 
             // Sortiranje
             switch (sortOrder)
@@ -81,8 +83,8 @@ namespace RealEstateHub.Controllers
 
             var nekretnina = await _context.Nekretnina
                 .Include(n => n.Lokacija)
-                .Include(n => n.Vlasnik)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(n => n.Slike)
+                .FirstOrDefaultAsync(n => n.Id == id);
 
             if (nekretnina == null)
                 return NotFound();
@@ -90,21 +92,16 @@ namespace RealEstateHub.Controllers
             var currentUserId = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.NameIdentifier) : null;
             bool isOwner = (currentUserId != null) && (nekretnina.VlasnikId == currentUserId);
 
-            // Povećaj broj pregleda SAMO ako nije vlasnik
             if (!isOwner)
             {
                 nekretnina.BrojPregleda++;
                 await _context.SaveChangesAsync();
             }
 
-            // Prikaz broja pregleda svima (ili možeš i ovdje po želji promijeniti)
             ViewBag.BrojPregleda = isOwner ? nekretnina.BrojPregleda : (int?)null;
 
             return View(nekretnina);
         }
-
-
-
 
 
         [Authorize(Roles = "Korisnik, Administrator")]
@@ -115,24 +112,45 @@ namespace RealEstateHub.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Create(Nekretnina nekretnina)
         {
-            // Uklonimo Vlasnik koji se dodjeljuje automatski
             ModelState.Remove("Vlasnik");
             ModelState.Remove("VlasnikId");
 
-            // Ako forma nije ispravna, vrati prikaz sa greškama
             if (!ModelState.IsValid)
-            {
-
                 return View(nekretnina);
-            }
 
-            // Dodjeljujemo trenutno prijavljenog korisnika kao vlasnika
             nekretnina.VlasnikId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            // Dodavanje u bazu
+            nekretnina.Slike = new List<SlikaNekretnine>();
+
+            if (nekretnina.UploadaneSlike != null && nekretnina.UploadaneSlike.Length > 0)
+            {
+                foreach (var fajl in nekretnina.UploadaneSlike)
+                {
+                    if (fajl != null && fajl.Length > 0)
+                    {
+                        var imeFajla = Guid.NewGuid().ToString() + Path.GetExtension(fajl.FileName);
+                        var putanjaFoldera = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads", "nekretnine");
+
+                        if (!Directory.Exists(putanjaFoldera))
+                            Directory.CreateDirectory(putanjaFoldera);
+
+                        var punaPutanja = Path.Combine(putanjaFoldera, imeFajla);
+
+                        using (var stream = new FileStream(punaPutanja, FileMode.Create))
+                        {
+                            await fajl.CopyToAsync(stream);
+                        }
+
+                        nekretnina.Slike.Add(new SlikaNekretnine
+                        {
+                            Putanja = "/uploads/nekretnine/" + imeFajla
+                        });
+                    }
+                }
+            }
+
             _context.Add(nekretnina);
             await _context.SaveChangesAsync();
 
@@ -144,28 +162,21 @@ namespace RealEstateHub.Controllers
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var nekretnina = await _context.Nekretnina
                 .Include(n => n.Lokacija)
                 .FirstOrDefaultAsync(n => n.Id == id);
 
             if (nekretnina == null)
-            {
                 return NotFound();
-            }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
-            {
                 return Forbid();
-            }
 
             return View(nekretnina);
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -176,27 +187,19 @@ namespace RealEstateHub.Controllers
             ModelState.Remove("Vlasnik");
 
             if (id != nekretnina.Id)
-            {
                 return NotFound();
-            }
 
-            // Učitaj postojeću nekretninu sa Lokacijom
             var existingNekretnina = await _context.Nekretnina
                 .Include(n => n.Lokacija)
                 .FirstOrDefaultAsync(n => n.Id == id);
 
             if (existingNekretnina == null)
-            {
                 return NotFound();
-            }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (existingNekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
-            {
                 return Forbid();
-            }
 
-            // Ažuriraj polja nekretnine
             existingNekretnina.naslov = nekretnina.naslov;
             existingNekretnina.opisNekretnine = nekretnina.opisNekretnine;
             existingNekretnina.cijena = nekretnina.cijena;
@@ -204,16 +207,15 @@ namespace RealEstateHub.Controllers
             existingNekretnina.brojSoba = nekretnina.brojSoba;
             existingNekretnina.vrstaNekretnine = nekretnina.vrstaNekretnine;
 
-            if (string.IsNullOrEmpty(nekretnina.Slika))
+            if (nekretnina.Slike == null || !nekretnina.Slike.Any())
             {
-                nekretnina.Slika = existingNekretnina.Slika;
+                nekretnina.Slike = existingNekretnina.Slike;
             }
             else
             {
-                existingNekretnina.Slika = nekretnina.Slika;
+                existingNekretnina.Slike = nekretnina.Slike;
             }
 
-            // Ažuriraj polja Lokacije ako postoji
             if (existingNekretnina.Lokacija != null && nekretnina.Lokacija != null)
             {
                 existingNekretnina.Lokacija.grad = nekretnina.Lokacija.grad;
@@ -229,38 +231,33 @@ namespace RealEstateHub.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!NekretninaExists(nekretnina.Id))
-                {
                     return NotFound();
-                }
                 else
-                {
                     throw;
-                }
             }
 
             return RedirectToAction("Details", new { id = nekretnina.Id });
         }
 
+
         [Authorize(Roles = "Korisnik, Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
             var nekretnina = await _context.Nekretnina
+                .Include(n => n.Slike)         // učitava slike zajedno sa nekretninom
+                .Include(n => n.Lokacija)      // opcionalno, ako koristiš lokaciju u Delete view-u
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+
             if (nekretnina == null)
-            {
                 return NotFound();
-            }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
-            {
                 return Forbid();
-            }
 
             return View(nekretnina);
         }
@@ -273,24 +270,18 @@ namespace RealEstateHub.Controllers
             var nekretnina = await _context.Nekretnina.FindAsync(id);
 
             if (nekretnina == null)
-            {
                 return NotFound();
-            }
 
             var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
-            {
                 return Forbid();
-            }
 
-            if (nekretnina != null)
-            {
-                _context.Nekretnina.Remove(nekretnina);
-            }
-
+            _context.Nekretnina.Remove(nekretnina);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
+
 
         [AllowAnonymous]
         public IActionResult Pretraga()
@@ -303,7 +294,9 @@ namespace RealEstateHub.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Pretraga(FilterNekretnina filter)
         {
-            var query = _context.Nekretnina.AsQueryable();
+            var query = _context.Nekretnina
+                .Include(n => n.Slike) // Učitaj slike da budu dostupne u view-u
+                .AsQueryable();
 
             if (filter.minCijena > 0)
                 query = query.Where(n => n.cijena >= filter.minCijena);
@@ -334,7 +327,6 @@ namespace RealEstateHub.Controllers
 
             return View("RezultatiPretrage", rezultat);
         }
-
 
 
         private bool NekretninaExists(int id)
