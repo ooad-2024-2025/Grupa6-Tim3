@@ -63,17 +63,29 @@
                         <span asp-validation-for="Lokacija.adresa" class="text-danger small"></span>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Lokacija.latituda" class="form-control" placeholder="Latituda" />
-                        <label asp-for="Lokacija.latituda">Latituda</label>
-                        <span asp-validation-for="Lokacija.latituda" class="text-danger small"></span>
+                    <div class="mb-3">
+                        <label class="form-label">Unos lokacije</label>
+                        <div>
+                            <input type="radio" name="lokacijaUnos" value="rucno" checked onchange="toggleMap(false)"> Ručni unos
+                            <input type="radio" name="lokacijaUnos" value="mapa" onchange="toggleMap(true)"> Odaberi na mapi
+                        </div>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Lokacija.longituda" class="form-control" placeholder="Longituda" />
-                        <label asp-for="Lokacija.longituda">Longituda</label>
-                        <span asp-validation-for="Lokacija.longituda" class="text-danger small"></span>
+                    <div id="manual-coordinates">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Lokacija.latituda" class="form-control" placeholder="Latituda" id="latInput" />
+                            <label asp-for="Lokacija.latituda">Latituda</label>
+                            <span asp-validation-for="Lokacija.latituda" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Lokacija.longituda" class="form-control" placeholder="Longituda" id="lngInput" />
+                            <label asp-for="Lokacija.longituda">Longituda</label>
+                            <span asp-validation-for="Lokacija.longituda" class="text-danger small"></span>
+                        </div>
                     </div>
+
+                    <div id="map-coordinates" style="height: 400px; display: none;" class="mb-3 rounded-3 border"></div>
 
                     <div class="mb-3">
                         <label for="UploadaneSlike" class="form-label">Slike nekretnine</label>
@@ -94,4 +106,45 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    <script>
+        let map, marker;
+
+        function toggleMap(showMap) {
+            document.getElementById('map-coordinates').style.display = showMap ? 'block' : 'none';
+            document.getElementById('manual-coordinates').style.display = showMap ? 'none' : 'block';
+
+            if (showMap && !map) {
+                initMap();
+            }
+        }
+
+        function initMap() {
+            map = L.map('map-coordinates').setView([43.8563, 18.4131], 13); // Sarajevo kao default
+
+            L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            map.on('click', function (e) {
+                const lat = e.latlng.lat.toFixed(6);
+                const lng = e.latlng.lng.toFixed(6);
+
+                document.getElementById('latInput').value = lat;
+                document.getElementById('lngInput').value = lng;
+
+                if (marker) {
+                    marker.setLatLng(e.latlng);
+                } else {
+                    marker = L.marker(e.latlng).addTo(map);
+                }
+            });
+        }
+    </script>
 }

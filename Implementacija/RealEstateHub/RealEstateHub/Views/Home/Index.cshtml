@@ -1,7 +1,10 @@
-﻿@model IEnumerable<RealEstateHub.Models.Nekretnina>
+﻿@using Azure.Core
+@model IEnumerable<RealEstateHub.Models.Nekretnina>
 
 @{
     ViewData["Title"] = "Početna stranica";
+    var sveSaLokacijom = ViewBag.SveSaLokacijom as List<RealEstateHub.Models.Nekretnina>;
+    var searchTerm = Context.Request.Query["searchTerm"].ToString();
 }
 
 <div class="hero-section text-white text-center py-5 mb-5"
@@ -75,53 +78,112 @@
     </div>
 </div>
 
-@section Styles {
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="container mt-5 mb-5">
+        <h2 class="text-center mb-4">Mapa svih nekretnina</h2>
+
+        <form method="get" asp-action="Index" asp-controller="Home" class="mb-4 text-center">
+            <input type="text" name="searchTerm" placeholder="Pretraži nekretninu..." class="form-control d-inline-block w-50" value="@searchTerm" />
+            <button type="submit" class="btn btn-primary ms-2">Pretraži</button>
+        </form>
+
+        <div id="map" style="height: 500px;" class="border rounded shadow-sm"></div>
+
+        @if (sveSaLokacijom == null || !sveSaLokacijom.Any())
+        {
+            <div class="alert alert-info text-center mt-3">
+                <i class="fas fa-info-circle me-2"></i> Nema nekretnina koje odgovaraju pretrazi.
+            </div>
+        }
+    </div>
+}
+else
+{
+    <div class="container mt-5 mb-5">
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            Samo prijavljeni korisnici mogu vidjeti prikaz nekretnina na mapi.
+        </div>
+    </div>
 }
 
-<style>
-    .hero-section {
-        min-height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    }
-
-    .property-img {
-        border-bottom: 1px solid rgba(0,0,0,.125);
-    }
-
-    .card-title {
-        min-height: 48px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-    }
-
-    .btn-primary {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #004085;
+@section Styles {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin="anonymous" />
+    <style>
+        .hero-section {
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
-    .text-primary {
-        color: #007bff !important;
-    }
+        .property-img {
+            border-bottom: 1px solid rgba(0,0,0,.125);
+        }
 
-    .card {
-        display: flex;
-        flex-direction: column;
-    }
+        .card-title {
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-    .card-body {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
-</style>
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+                border-color: #004085;
+            }
+
+        .text-primary {
+            color: #007bff !important;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-body {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    <script>
+        var map = L.map('map').setView([44.0, 17.0], 7);
+
+        L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var nekretnine = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(sveSaLokacijom ?? new List<RealEstateHub.Models.Nekretnina>()));
+
+        nekretnine.forEach(function (n) {
+            if (n.Lokacija && n.Lokacija.latituda && n.Lokacija.longituda) {
+                var marker = L.marker([n.Lokacija.latituda, n.Lokacija.longituda]).addTo(map);
+                var popup = `<strong>${n.naslov}</strong><br/><a href="/Nekretnina/Details/${n.Id}">Detalji</a>`;
+                marker.bindPopup(popup);
+            }
+        });
+    </script>
+}

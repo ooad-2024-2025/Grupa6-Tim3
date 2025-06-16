@@ -65,40 +65,44 @@
                         <span asp-validation-for="Lokacija.adresa" class="text-danger small"></span>
                     </div>
 
-                    <div class="form-floating mb-3">
-                        <input asp-for="Lokacija.latituda" class="form-control" placeholder="Latituda" />
-                        <label asp-for="Lokacija.latituda">Latituda</label>
-                        <span asp-validation-for="Lokacija.latituda" class="text-danger small"></span>
-                    </div>
-
-                    <div class="form-floating mb-3">
-                        <input asp-for="Lokacija.longituda" class="form-control" placeholder="Longituda" />
-                        <label asp-for="Lokacija.longituda">Longituda</label>
-                        <span asp-validation-for="Lokacija.longituda" class="text-danger small"></span>
-                    </div>
-
                     <div class="mb-3">
-                        <label class="form-label">Trenutne slike nekretnine</label>
-                        <div class="d-flex flex-wrap gap-2 mb-2">
-                            @if (Model.Slike != null && Model.Slike.Any())
-                            {
-                                foreach (var slika in Model.Slike)
-                                {
-                                    <img src="@slika.Putanja" alt="Slika nekretnine" class="img-thumbnail" style="max-height: 100px;" />
-                                }
-                            }
-                            else
-                            {
-                                <span class="text-muted">Nema dodanih slika.</span>
-                            }
+                        <label class="form-label">Unos lokacije</label>
+                        <div>
+                            <input type="radio" name="lokacijaUnos" value="rucno" checked onchange="toggleMap(false)"> Ručni unos
+                            <input type="radio" name="lokacijaUnos" value="mapa" onchange="toggleMap(true)"> Odaberi na mapi
                         </div>
                     </div>
 
+                    <div id="manual-coordinates">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Lokacija.latituda" class="form-control" placeholder="Latituda" id="latInput" />
+                            <label asp-for="Lokacija.latituda">Latituda</label>
+                            <span asp-validation-for="Lokacija.latituda" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Lokacija.longituda" class="form-control" placeholder="Longituda" id="lngInput" />
+                            <label asp-for="Lokacija.longituda">Longituda</label>
+                            <span asp-validation-for="Lokacija.longituda" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div id="map-coordinates" style="height: 400px; display: none;" class="mb-3 rounded-3 border"></div>
+
                     <div class="mb-3">
-                        <label for="novaSlika" class="form-label">Dodaj novu sliku</label>
-                        <input type="file" id="novaSlika" class="form-control" accept="image/*" />
-                        <input type="hidden" name="NovaSlikaBase64" id="novaSlikaBase64" />
-                        <span asp-validation-for="Slike" class="text-danger small"></span>
+                        <label for="UploadaneSlike" class="form-label">Dodaj nove slike (opcionalno)</label>
+                        <input type="file" id="UploadaneSlike" name="UploadaneSlike" class="form-control" accept="image/*" multiple />
+                        <span asp-validation-for="UploadaneSlike" class="text-danger small"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Trenutne slike:</label>
+                        <div class="d-flex flex-wrap gap-2">
+                            @foreach (var slika in Model.Slike ?? new List<RealEstateHub.Models.SlikaNekretnine>())
+                            {
+                                <img src="@slika.Putanja" class="img-thumbnail" style="height: 80px;" />
+                            }
+                        </div>
                     </div>
 
                     <button type="submit" class="btn btn-primary w-100 py-2">Sačuvaj promjene</button>
@@ -114,19 +118,62 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        document.getElementById('novaSlika').addEventListener('change', function (event) {
-            const file = event.target.files[0];
-            if (!file) {
-                document.getElementById('novaSlikaBase64').value = '';
-                return;
-            }
 
-            const reader = new FileReader();
-            reader.onloadend = function () {
-                document.getElementById('novaSlikaBase64').value = reader.result;
-            };
-            reader.readAsDataURL(file);
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin="anonymous"></script>
+
+    <script>
+        let map, marker;
+
+        function toggleMap(showMap) {
+            document.getElementById('map-coordinates').style.display = showMap ? 'block' : 'none';
+            document.getElementById('manual-coordinates').style.display = showMap ? 'none' : 'block';
+
+            if (showMap && !map) {
+                initMap();
+            }
+        }
+
+        function initMap() {
+            const lat = parseFloat(document.getElementById('latInput').value) || 43.8563;
+            const lng = parseFloat(document.getElementById('lngInput').value) || 18.4131;
+
+            map = L.map('map-coordinates').setView([lat, lng], 13);
+
+            L.tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            marker = L.marker([lat, lng], { draggable: true }).addTo(map);
+
+            marker.on('dragend', function (e) {
+                const pos = marker.getLatLng();
+                document.getElementById('latInput').value = pos.lat.toFixed(6);
+                document.getElementById('lngInput').value = pos.lng.toFixed(6);
+            });
+
+            map.on('click', function (e) {
+                const lat = e.latlng.lat.toFixed(6);
+                const lng = e.latlng.lng.toFixed(6);
+
+                document.getElementById('latInput').value = lat;
+                document.getElementById('lngInput').value = lng;
+
+                marker.setLatLng(e.latlng);
+            });
+        }
+
+        // Ako već postoji lat/lon, automatski prikaži mapu
+        document.addEventListener("DOMContentLoaded", function () {
+            const lat = parseFloat(document.getElementById('latInput').value);
+            const lng = parseFloat(document.getElementById('lngInput').value);
+            if (!isNaN(lat) && !isNaN(lng)) {
+                document.querySelector('input[name="lokacijaUnos"][value="mapa"]').checked = true;
+                toggleMap(true);
+            }
         });
     </script>
 }

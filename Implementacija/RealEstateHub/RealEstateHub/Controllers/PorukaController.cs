@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace RealEstateHub.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class PorukaController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -21,6 +22,7 @@ namespace RealEstateHub.Controllers
         }
 
         // GET: Poruka
+
         public async Task<IActionResult> Index()
         {
             return View(await _context.Poruka.ToListAsync());

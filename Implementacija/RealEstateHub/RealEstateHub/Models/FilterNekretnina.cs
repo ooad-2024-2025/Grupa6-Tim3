@@ -34,10 +34,15 @@ namespace RealEstateHub.Models
         [EnumDataType(typeof(Kategorija))]
         public Kategorija tipNekretnine { get; set; }
 
-        [Display(Name = "Lokacija")]
-        public Lokacija lokacija { get; set; }
+         //[Display(Name = "Lokacija")]
+        //public Lokacija lokacija { get; set; }
+
         public string KorisnikId { get; set; }
 
+        //dodano
+        [Display(Name = "Primi obavještenja o novim nekretninama")]
+        public bool ZeliObavjestenja { get; set; }
 
+        //dodano
     }
 }

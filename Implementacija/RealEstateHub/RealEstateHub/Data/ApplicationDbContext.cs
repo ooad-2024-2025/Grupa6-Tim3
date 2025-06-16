@@ -22,6 +22,8 @@ namespace RealEstateHub.Data
         public DbSet<Sesija> Sesija { get; set; }
         public DbSet<Vlasnik_Nekretnina> Vlasnik_Nekretnina { get; set; }
         public DbSet<SlikaNekretnine> SlikeNekretnine { get; set; }
+        public DbSet<PoslanoObavjestenje> PoslanaObavjestenja { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -64,6 +66,18 @@ namespace RealEstateHub.Data
                 .WithOne(l => l.Nekretnina)   
                 .HasForeignKey<Lokacija>(l => l.nekretninaId) // Strani ključ je u Lokacija modelu
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<PoslanoObavjestenje>()
+        .HasOne(p => p.Nekretnina)
+        .WithMany()
+        .HasForeignKey(p => p.NekretninaId)
+        .OnDelete(DeleteBehavior.Restrict); // ili .NoAction()
+
+            modelBuilder.Entity<PoslanoObavjestenje>()
+                .HasOne(p => p.Korisnik)
+                .WithMany()
+                .HasForeignKey(p => p.KorisnikId)
+                .OnDelete(DeleteBehavior.Restrict); // ili .NoAction()
 
             base.OnModelCreating(modelBuilder); 
         }

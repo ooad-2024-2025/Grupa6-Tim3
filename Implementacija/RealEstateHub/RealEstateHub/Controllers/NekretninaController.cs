@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -16,10 +17,12 @@ namespace RealEstateHub.Controllers
     public class NekretninaController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public NekretninaController(ApplicationDbContext context)
+        public NekretninaController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [AllowAnonymous]
@@ -276,11 +279,20 @@ namespace RealEstateHub.Controllers
             if (nekretnina.VlasnikId != currentUserId && !User.IsInRole("Administrator"))
                 return Forbid();
 
+            // Prvo izbriši sva PoslanaObavjestenja povezana sa ovom nekretninom
+            var poslanaObavjestenja = _context.PoslanaObavjestenja.Where(p => p.NekretninaId == id);
+            _context.PoslanaObavjestenja.RemoveRange(poslanaObavjestenja);
+
+            // Sačuvaj promjene nakon brisanja obavještenja
+            await _context.SaveChangesAsync();
+
+            // Sada možeš bez problema obrisati nekretninu
             _context.Nekretnina.Remove(nekretnina);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+
 
 
         [AllowAnonymous]
@@ -295,7 +307,7 @@ namespace RealEstateHub.Controllers
         public async Task<IActionResult> Pretraga(FilterNekretnina filter)
         {
             var query = _context.Nekretnina
-                .Include(n => n.Slike) // Učitaj slike da budu dostupne u view-u
+                .Include(n => n.Slike)
                 .AsQueryable();
 
             if (filter.minCijena > 0)
@@ -320,6 +332,16 @@ namespace RealEstateHub.Controllers
 
             var rezultat = await query.ToListAsync();
 
+            // 🟢 Ako korisnik želi obavještenja, sačuvaj filter
+            if (filter.ZeliObavjestenja && User.Identity.IsAuthenticated)
+            {
+                var korisnikId = _userManager.GetUserId(User); // preuzima Id trenutno prijavljenog korisnika
+                filter.KorisnikId = korisnikId;
+
+                _context.FilterNekretnina.Add(filter);
+                await _context.SaveChangesAsync();
+            }
+
             if (!rezultat.Any())
             {
                 ViewBag.Poruka = "Nema nekretnina koje zadovoljavaju kriterije.";
@@ -327,6 +349,7 @@ namespace RealEstateHub.Controllers
 
             return View("RezultatiPretrage", rezultat);
         }
+
 
 
         private bool NekretninaExists(int id)

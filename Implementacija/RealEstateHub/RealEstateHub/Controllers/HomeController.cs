@@ -20,25 +20,31 @@ namespace RealEstateHub.Controllers
             _context = context; 
         }
 
-        // Ažuriraj Index akciju da dohvati tri najnovije nekretnine i prikaze mapu
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? searchTerm)
         {
+            // Tri najnovije nekretnine (bez filtera)
             var najnovije = await _context.Nekretnina
-                .Include(n => n.Slike) // uèitavamo slike zajedno s nekretninama
+                .Include(n => n.Slike)
                 .OrderByDescending(n => n.Id)
                 .Take(3)
                 .ToListAsync();
 
-            var saLokacijom = await _context.Nekretnina
+            // Filtrirane nekretnine za mapu - samo ako postoji searchTerm
+            IQueryable<Nekretnina> mapaQuery = _context.Nekretnina
                 .Include(n => n.Lokacija)
-                .Where(n => n.Lokacija != null && n.Lokacija.latituda != 0 && n.Lokacija.longituda != 0)
-                .ToListAsync();
+                .Include(n => n.Slike)
+                .Where(n => n.Lokacija != null && n.Lokacija.latituda != 0 && n.Lokacija.longituda != 0);
 
-            ViewBag.SveSaLokacijom = saLokacijom;
+            if (!string.IsNullOrWhiteSpace(searchTerm))
+            {
+                mapaQuery = mapaQuery.Where(n => n.naslov.Contains(searchTerm));
+            }
 
+            var filtriraneZaMapu = await mapaQuery.ToListAsync();
+
+            ViewBag.SveSaLokacijom = filtriraneZaMapu;
             return View(najnovije);
         }
-
 
         public IActionResult Privacy()
         {

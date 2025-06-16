@@ -7,7 +7,7 @@ namespace RealEstateHub.Models{
         public int nekretninaId { get; set; }
 
         [Display(Name = "Grad")]
-        [StringLength(maximumLength: 50, MinimumLength = 5, ErrorMessage =
+        [StringLength(maximumLength: 50, MinimumLength = 3, ErrorMessage =
             "Naziv grada mora imati između 3 i 50 znakova!")]
         [RegularExpression(@"^[a-zA-Z ]*$", ErrorMessage = "Dozvoljeno je samo korištenje velikih i malih slova i razmaka!")]
         public string grad { get; set; }

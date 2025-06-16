@@ -244,8 +244,8 @@ namespace RealEstateHub.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("lokacijaId")
-                        .HasColumnType("int");
+                    b.Property<bool>("ZeliObavjestenja")
+                        .HasColumnType("bit");
 
                     b.Property<int>("maxBrojSoba")
                         .HasColumnType("int");
@@ -269,8 +269,6 @@ namespace RealEstateHub.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("filterNekretninaId");
-
-                    b.HasIndex("lokacijaId");
 
                     b.ToTable("FilterNekretnina", (string)null);
                 });
@@ -400,6 +398,9 @@ namespace RealEstateHub.Data.Migrations
                     b.Property<int>("BrojPregleda")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DatumDodavanja")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("VlasnikId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -520,6 +521,33 @@ namespace RealEstateHub.Data.Migrations
                     b.ToTable("Poruka", (string)null);
                 });
 
+            modelBuilder.Entity("RealEstateHub.Models.PoslanoObavjestenje", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("DatumSlanja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("KorisnikId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("NekretninaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("KorisnikId");
+
+                    b.HasIndex("NekretninaId");
+
+                    b.ToTable("PoslanaObavjestenja");
+                });
+
             modelBuilder.Entity("RealEstateHub.Models.Sesija", b =>
                 {
                     b.Property<int>("sesijaId")
@@ -630,17 +658,6 @@ namespace RealEstateHub.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RealEstateHub.Models.FilterNekretnina", b =>
-                {
-                    b.HasOne("RealEstateHub.Models.Lokacija", "lokacija")
-                        .WithMany()
-                        .HasForeignKey("lokacijaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("lokacija");
-                });
-
             modelBuilder.Entity("RealEstateHub.Models.Kriterij", b =>
                 {
                     b.HasOne("RealEstateHub.Models.Obavjestenje", null)
@@ -700,6 +717,25 @@ namespace RealEstateHub.Data.Migrations
                     b.Navigation("Posiljalac");
 
                     b.Navigation("Primalac");
+                });
+
+            modelBuilder.Entity("RealEstateHub.Models.PoslanoObavjestenje", b =>
+                {
+                    b.HasOne("RealEstateHub.Models.ApplicationUser", "Korisnik")
+                        .WithMany()
+                        .HasForeignKey("KorisnikId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("RealEstateHub.Models.Nekretnina", "Nekretnina")
+                        .WithMany()
+                        .HasForeignKey("NekretninaId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Korisnik");
+
+                    b.Navigation("Nekretnina");
                 });
 
             modelBuilder.Entity("RealEstateHub.Models.Sesija", b =>

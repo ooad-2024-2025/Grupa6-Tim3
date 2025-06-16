@@ -59,5 +59,7 @@ namespace RealEstateHub.Models{
         //dodano
         public int BrojPregleda { get; set; } = 0;
 
+
+        public DateTime DatumDodavanja { get; set; } = DateTime.Now;
     }
 }

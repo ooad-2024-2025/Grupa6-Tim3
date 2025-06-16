@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -15,10 +16,14 @@ namespace RealEstateHub.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public FilterNekretninaController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _userManager;
+
+        public FilterNekretninaController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
 
         // GET: FilterNekretnina
         [Authorize(Roles = "Administrator")]
