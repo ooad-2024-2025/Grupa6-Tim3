@@ -228,6 +228,7 @@ wwwroot\uploads\nekretnine\6a362b4f-ff23-476f-827a-1b32a1fc2c51.jpg
 wwwroot\uploads\nekretnine\6a9500cb-cd3b-4ae2-ac75-e7e136ea12db.jpg
 wwwroot\uploads\nekretnine\6e2364f9-daba-418c-a1cb-a76a7c97fbfa.jpg
 wwwroot\uploads\nekretnine\6fc87730-ec9a-42b3-97d0-f9d835cebedf.png
+wwwroot\uploads\nekretnine\72f811b9-6313-40c7-897f-caf83b04543c.png
 wwwroot\uploads\nekretnine\732467f2-f7a7-49ea-92a2-27c137b26f18.png
 wwwroot\uploads\nekretnine\748ddab8-3f8b-4c92-9dd5-c9c7fff41ca0.png
 wwwroot\uploads\nekretnine\75dba53a-4d92-47e3-a22d-9f0f9251d421.png
@@ -270,5 +271,6 @@ wwwroot\uploads\nekretnine\ef85cbfe-15ac-4820-bdfe-c9f6b94e3acc.png
 wwwroot\uploads\nekretnine\f3338eab-de8b-494d-bb63-9941100a2d13.png
 wwwroot\uploads\nekretnine\f7458645-912b-409d-8cf9-dddefaee8808.jpg
 wwwroot\uploads\nekretnine\fa3b6426-7844-4fde-a140-c965adadf16e.jpg
+wwwroot\uploads\nekretnine\fa3d632d-7154-4627-87da-fcc59734851f.png
 wwwroot\uploads\nekretnine\fd3f71f2-7553-463a-ba5b-46ed3188bc2f.jpg
 wwwroot\uploads\nekretnine\ff93bc8c-15cc-4d7a-b56d-41054da219d4.png

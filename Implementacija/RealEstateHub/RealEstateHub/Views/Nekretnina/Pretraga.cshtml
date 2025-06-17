@@ -76,14 +76,15 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="form-check">
-                            <input class="form-check-input" asp-for="ZeliObavjestenja" type="checkbox" />
-                            <label class="form-check-label" asp-for="ZeliObavjestenja">
-                                Želim da me obavijestite kada se pojavi nova nekretnina koja odgovara filterima
-                            </label>
-                        </div>
-
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="form-check">
+                                <input class="form-check-input" asp-for="ZeliObavjestenja" type="checkbox" />
+                                <label class="form-check-label" asp-for="ZeliObavjestenja">
+                                    Želim da me obavijestite kada se pojavi nova nekretnina koja odgovara filterima
+                                </label>
+                            </div>
+                        }
                     </div>
 
                     <div class="d-grid gap-2">
