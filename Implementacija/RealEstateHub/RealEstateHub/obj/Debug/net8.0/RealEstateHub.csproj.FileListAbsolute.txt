@@ -1055,3 +1055,4 @@ C:\Users\WIN10\Documents\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEst
 C:\Users\WIN10\Documents\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\RealEstateHub.pdb
 C:\Users\WIN10\Documents\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\RealEstateHub.genruntimeconfig.cache
 C:\Users\WIN10\Documents\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\ref\RealEstateHub.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt

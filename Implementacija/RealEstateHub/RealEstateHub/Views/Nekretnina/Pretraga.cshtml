@@ -76,7 +76,7 @@
                                 </select>
                             </div>
                         </div>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
                         {
                             <div class="form-check">
                                 <input class="form-check-input" asp-for="ZeliObavjestenja" type="checkbox" />

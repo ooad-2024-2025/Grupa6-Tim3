@@ -78,7 +78,7 @@
     </div>
 </div>
 
-@if (User.Identity.IsAuthenticated)
+@if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
 {
     <div class="container mt-5 mb-5">
         <h2 class="text-center mb-4">Mapa svih nekretnina</h2>

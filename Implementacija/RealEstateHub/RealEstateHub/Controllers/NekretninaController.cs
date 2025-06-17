@@ -350,6 +350,19 @@ namespace RealEstateHub.Controllers
             return View("RezultatiPretrage", rezultat);
         }
 
+        [Authorize]
+        public async Task<IActionResult> MojeNekretnine()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var mojeNekretnine = await _context.Nekretnina
+                .Include(n => n.Slike)
+                .Where(n => n.VlasnikId == userId)
+                .ToListAsync();
+
+            return View("MojeNekretnine", mojeNekretnine);
+        }
+
 
 
         private bool NekretninaExists(int id)

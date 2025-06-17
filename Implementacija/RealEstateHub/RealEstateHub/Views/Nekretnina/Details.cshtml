@@ -112,18 +112,18 @@
     @* Interaktivna mapa *@
     @if (Model.Lokacija != null)
     {
-        <div class="mt-5">
-            <h4 class="text-primary">Lokacija na mapi</h4>
+        <div class="mt-5"> 
 
-            @if (User.Identity.IsAuthenticated)
+            @if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
             {
+                <h4 class="text-primary">Lokacija na mapi</h4>
                 <div id="map"
                      class="rounded shadow-sm border"
                      style="height: 400px;"></div>
             }
             else
             {
-                <div class="alert alert-warning">
+                <div class="alert alert-warning text-center">
                     Prikaz lokacije na interaktivnoj mapi je moguć samo za prijavljene korisnike.
                 </div>
             }
@@ -131,7 +131,7 @@
     }
 
     @* Forma za kontakt *@
-    @if (User.Identity.IsAuthenticated && Model.VlasnikId != currentUserId)
+    @if ((User.IsInRole("Administrator") || User.IsInRole("Korisnik")) && Model.VlasnikId != currentUserId)
     {
         <div class="card shadow-sm mt-5">
             <div class="card-body">
@@ -161,7 +161,7 @@
             </div>
         </div>
     }
-    else if (!User.Identity.IsAuthenticated)
+    else if (!(User.IsInRole("Administrator") || User.IsInRole("Korisnik")))
     {
         <div class="alert alert-info text-center mt-4">
             <strong>Morate biti prijavljeni da biste kontaktirali vlasnika.</strong>
@@ -181,7 +181,7 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin="anonymous"></script>
 
-    @if (Model.Lokacija != null && User.Identity.IsAuthenticated)
+    @if (Model.Lokacija != null && (User.IsInRole("Administrator") || User.IsInRole("Korisnik")))      
     {
         <script>
             var lat = @Model.Lokacija.latituda.ToString(System.Globalization.CultureInfo.InvariantCulture);

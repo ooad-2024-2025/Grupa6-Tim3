@@ -26,18 +26,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Početna stranica</a>
                         </li>
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Nekretnina" asp-action="Create">Dodaj nekretninu</a>
                             </li>
                         }
-                        @if (User.Identity.IsAuthenticated)
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Poruka" asp-action="MojePoruke">Moje poruke</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Poruka" asp-action="MojePoruke">Poruke</a>
                             </li>
                         }
+                        @if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
+                        {
+                            <li class="nav-item">                                
+                                <a class="nav-link text-dark" asp-controller="Nekretnina" asp-action="MojeNekretnine">Moje nekretnine</a>
+                            </li>
+                        }
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Nekretnina" asp-action="Pretraga">Pretraga</a>
                         </li>
