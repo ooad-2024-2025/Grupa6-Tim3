@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Areas/Identity/Pages/Account/ForgotPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZENvbmZpcm1hdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Areas/Identity/Pages/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -86,6 +90,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Areas/Identity/Pages/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Areas/Identity/Pages/Account/ResetPasswordConfirmation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkQ29uZmlybWF0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Areas/Identity/Pages/Account/_ViewImports.cshtml]
@@ -250,6 +258,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/Pretraga.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxQcmV0cmFnYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Nekretnina/RezultatiPretrage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTmVrcmV0bmluYVxSZXp1bHRhdGlQcmV0cmFnZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/dzafi/OneDrive/Dokumenti/GitHub/Grupa6-Tim3/Implementacija/RealEstateHub/RealEstateHub/Views/Obavjestenje/Create.cshtml]

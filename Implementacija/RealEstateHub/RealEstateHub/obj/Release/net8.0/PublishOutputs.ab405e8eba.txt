@@ -8,7 +8,9 @@ C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHu
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\RealEstateHub.pdb
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Azure.Core.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\BouncyCastle.Cryptography.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Humanizer.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\MailKit.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
@@ -66,6 +68,7 @@ C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHu
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\MimeKit.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Mono.TextTemplating.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\Newtonsoft.Json.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\NuGet.Common.dll
@@ -93,6 +96,7 @@ C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHu
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Memory.Data.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Reflection.MetadataLoadContext.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Runtime.Caching.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.Pkcs.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Security.Permissions.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\System.Windows.Extensions.dll
@@ -264,5 +268,6 @@ C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHu
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\e_sqlite3.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net7.0\System.Windows.Extensions.dll

@@ -446,7 +446,6 @@ C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHu
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\staticwebassets.build.endpoints.json
-C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\RealEsta.F42C272F.Up2Date
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\RealEstateHub.dll
 C:\Users\dzafi\OneDrive\Dokumenti\GitHub\Grupa6-Tim3\Implementacija\RealEstateHub\RealEstateHub\obj\Debug\net8.0\refint\RealEstateHub.dll

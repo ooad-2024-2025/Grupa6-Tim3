@@ -3,8 +3,8 @@
 <Project>
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAImH1HaRh+Um7iTfiI+rZawAAAAACAAAAAAAQZgAAAAEAACAAAAAr7A7vCzCCjKIXsDtqRVAxD8yv13F0Ip9Gkzw6jXiTMwAAAAAOgAAAAAIAACAAAAAISJy+MQXFoV12CF14RHenHc3xvaz7fjjQ8U/q6sY5niAAAABAk9jKa8zcSvpjhFzyZCOVHTxUTIUkQvemsmxvjFEO8EAAAAB28gs22FY8RcHPdDVjaL5E54PSD8cu1+6PI/q9IUAgyuo/wpYrqicCp6R0055PWpaBCoiA+uodTjkpHwp9b321</EncryptedPassword>
-    <History>False|2025-06-06T16:19:10.1153928Z||;True|2025-06-04T00:32:04.2146155+02:00||;</History>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAImH1HaRh+Um7iTfiI+rZawAAAAACAAAAAAAQZgAAAAEAACAAAABC/e22SoFNmhnGW3T6AwOWbSx5jdrFHVVAVbsngpR+EAAAAAAOgAAAAAIAACAAAAAjl5HadlvSxz8lcJe7+xhybNCwFmjFUDrCpUQAAE5nJyAAAADOIAxCKm6OcvJPHS5ptzVW8UknMeqSRXhDbW3Pw+ChCkAAAACwxsL95dVg7webxdgPuc7lOXszr2c7dxJ6M4RFPjio7esl0uUT9KhdFXb5BIBmmJ4WjDHFKyfBi7jVqQzqw5F0</EncryptedPassword>
+    <History>True|2025-06-17T18:20:42.9009060Z||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>
