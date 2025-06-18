@@ -1,5 +1,5 @@
 # 🏠 Real Estate Hub
-### Grupa 8 – Tim 2
+### Grupa 6 – Tim 3
 
 **Real Estate Hub** je web aplikacija za upravljanje nekretninama. Omogućava korisnicima da pregledaju, pretražuju i upravljaju ponudom stanova, kuća i poslovnih prostora. Sistem podržava:
 
@@ -26,10 +26,10 @@
 
 ## 🛢️ Baza podataka
 
-**Connection string:** "Data Source=SQL1003.site4now.net;Initial Catalog=db_aba878_ooad2025v2;User Id=db_aba878_ooad2025v2_admin;Password=ooad2025"
+**Konekcijski string:** "Data Source=SQL1003.site4now.net;Initial Catalog=db_aba878_ooad2025v2;User Id=db_aba878_ooad2025v2_admin;Password=ooad2025"
 
 
-## 🌐 Link do aplikacije
+## 🌐 Link aplikacije
 
 🔗 [Real Estate Hub](http://ooad2025v2-001-site1.jtempurl.com)
 
