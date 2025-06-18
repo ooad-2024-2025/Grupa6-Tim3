@@ -84,16 +84,24 @@
             <div class="d-flex justify-content-between mt-4">
                 @if (Model.VlasnikId == currentUserId || User.IsInRole("Administrator"))
                 {
-                    <a asp-action="Edit"
-                       asp-route-id="@Model.Id"
-                       class="btn btn-warning">
-                        <i class="fas fa-edit me-1"></i> Uredi
-                    </a>
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-warning d-flex align-items-center gap-1">
+                            <i class="fas fa-edit"></i> Uredi
+                        </a>
+                        <a asp-action="Delete"
+                           asp-route-id="@Model.Id"
+                           class="btn btn-danger d-flex align-items-center gap-1">
+                            <i class="fas fa-trash-alt"></i> Obriši
+                        </a>
+                    </div>
                 }
                 <a asp-action="Index" class="btn btn-secondary">
                     <i class="fas fa-arrow-left me-1"></i> Povratak na listu
                 </a>
             </div>
+
         </div>
     </div>
 

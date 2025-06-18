@@ -22,9 +22,10 @@
 <h1 class="text-center my-4">Aktivni oglasi</h1>
 
 <div class="d-flex justify-content-center gap-2 mb-4">
-    <a asp-action="Create" class="btn btn-success">
-        <i class="fas fa-plus-circle me-1"></i> Dodaj novu nekretninu
-    </a>
+    @if (User.IsInRole("Administrator") || User.IsInRole("Korisnik"))
+    {
+        <a asp-controller="Nekretnina" asp-action="Dodaj" class="btn btn-primary">Dodaj nekretninu</a>
+    }
     <a asp-action="Pretraga" class="btn btn-outline-primary">
         <i class="fas fa-search me-1"></i> Pretraži nekretnine
     </a>
